@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.administrator.myapplication3">
+
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="supercrm"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".presenter.activity.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".presenter.activity.customer.CustomerActivity"
+            android:label="客户管理"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".presenter.activity.customer.AddCustomerActivity"
+            android:label="新增客户"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".presenter.activity.customer.CustomerDetailsActivity"
+            android:label="客户详情" />
+        <activity
+            android:name=".presenter.activity.contract.ContractActivity"
+            android:label="合同管理"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".presenter.activity.product.ProductActivity"
+            android:label="产品管理"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".presenter.activity.contact.ContactActivity"
+            android:label="联系人管理"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".presenter.activity.opportunity.OpportunityActivity"
+            android:label="商机管理"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".presenter.activity.contract.AddContractActivity"
+            android:label="新增合同"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".presenter.activity.contract.ContractDetailsActivity"
+            android:label="合同详情" />
+        <activity
+            android:name=".presenter.activity.contact.AddContactActivity"
+            android:label="新增联系人" />
+        <activity
+            android:name=".presenter.activity.product.AddProductActivity"
+            android:label="新增产品" />
+        <activity
+            android:name=".presenter.activity.opportunity.AddOpportunityActivity"
+            android:label="新增商机" />
+        <activity
+            android:name=".presenter.activity.contact.ContactDetailsActivity"
+            android:label="联系人详情" />
+        <activity
+            android:name=".presenter.activity.product.ProductDetailsActivity"
+            android:label="产品详情" />
+        <activity
+            android:name=".presenter.activity.opportunity.OpportunityDetailsActivity"
+            android:label="商机详情" />
+        <activity
+            android:name=".presenter.activity.business.BusinessActivity"
+            android:label="业务管理" />
+        <activity android:name=".presenter.activity.business.NotificationActivity"
+            android:label="提醒设置"
+            />
+        <activity android:name=".presenter.activity.business.GoalActivity"
+            android:label="业务目标"/>
+        <activity android:name=".presenter.activity.business.ChartActivity"
+            android:label="报表展现"/>
+    </application>
+
+</manifest>

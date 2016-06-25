@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".presenter.activity.LoginActivity"
+    android:weightSum="1">
+
+
+
+    <!--<ListView-->
+        <!--android:id="@+id/list_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent" >-->
+    <!--</ListView>-->
+
+    <!--<ImageButton-->
+        <!--android:layout_width="80dip"-->
+        <!--android:layout_height="40dip"-->
+        <!--android:src="@drawable/oppbtn"-->
+        <!--android:scaleType="fitXY"-->
+        <!--android:background="@android:color/transparent" />-->
+
+
+
+
+    <ImageButton
+        android:layout_marginTop="20dp"
+        android:layout_width="225dp"
+        android:layout_height="75dp"
+        android:background="@drawable/oppbtn"
+        android:layout_gravity="center"
+        android:id="@+id/button_opportunity"
+        android:layout_weight="0.09" />
+
+
+
+    <ImageButton
+        android:layout_marginTop="10dp"
+        android:layout_width="225dp"
+        android:layout_height="75dp"
+        android:background="@drawable/cusbtn"
+        android:layout_gravity="center"
+        android:id="@+id/button_customer"
+        android:layout_weight="0.09" />
+
+
+
+    <ImageButton
+        android:layout_marginTop="10dp"
+        android:layout_width="225dp"
+        android:layout_height="75dp"
+        android:background="@drawable/ctrbtn"
+        android:layout_gravity="center"
+        android:id="@+id/button_contract"
+        android:layout_weight="0.09" />
+
+
+    <ImageButton
+        android:layout_marginTop="10dp"
+        android:layout_width="225dp"
+        android:layout_height="75dp"
+        android:background="@drawable/conbtn"
+        android:layout_gravity="center"
+        android:id="@+id/button_contact"
+        android:layout_weight="0.09" />
+
+    <ImageButton
+        android:layout_marginTop="10dp"
+        android:layout_width="225dp"
+        android:layout_height="75dp"
+        android:background="@drawable/probtn"
+        android:layout_gravity="center"
+        android:id="@+id/button_product"
+        android:layout_weight="0.09" />
+
+    <ImageButton
+        android:layout_marginTop="10dp"
+        android:layout_width="225dp"
+        android:layout_height="75dp"
+        android:background="@drawable/busbtn"
+        android:layout_gravity="center"
+        android:id="@+id/button_business"
+        android:layout_weight="0.09" />
+
+    <!--<Button-->
+        <!--android:layout_width="354dp"-->
+        <!--android:layout_height="31dp"-->
+        <!--android:text="客户"-->
+        <!--android:id="@+id/button_customer"-->
+        <!--android:layout_weight="0.09"-->
+        <!--android:layout_gravity="center" />-->
+
+    <!--<Button-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="合同"-->
+            <!--android:id="@+id/button_contract" />-->
+
+        <!--<Button-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="业务管理"-->
+            <!--android:id="@+id/button_business" />-->
+
+        <!--<Button-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="联系人"-->
+            <!--android:id="@+id/button_contact" />-->
+
+        <!--<Button-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="产品"-->
+            <!--android:id="@+id/button_product" />-->
+
+
+</LinearLayout>
