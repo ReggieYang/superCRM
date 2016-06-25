@@ -187,7 +187,8 @@ public class CustomerService {
 //        map.put("website", customer.getWebsite());
 //        map.put("address", customer.getAddress());
 //        map.put("zipcode", customer.getZipcode());
-        map.put("staffid", staffid + "");
+//        map.put("staffid", staffid + "");
+
 //        map.put("customerremarks", customer.getCustomerremarks());
 
         MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/customer_modify_json"

@@ -176,15 +176,10 @@
             android:textColor="#1590dd"
             android:textSize="16dp" />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/tel"
-            android:textSize="16dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginBottom="0dp"
-            android:layout_marginLeft="15dp" />
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/productpicture" />
 
         <TextView
             android:layout_width="wrap_content"

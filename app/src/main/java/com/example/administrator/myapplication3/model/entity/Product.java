@@ -118,7 +118,7 @@ public class Product implements ParseJSON{
         salesunit = info.getString("salesunit");
         unitcost = info.getDouble("unitcost");
         classification = info.getString("classification");
-        pitcure = info.getString("pitcure");
+        pitcure = info.getString("picture");
         introduction = info.getString("introduction");
         productremarks = info.getString("productremarks");
 

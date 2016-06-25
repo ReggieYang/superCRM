@@ -40,7 +40,6 @@ public class CustomerDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_details);
 
-
         int id = Integer.parseInt(getIntent().getStringExtra("id"));
 
         System.out.println(id);
@@ -50,7 +49,9 @@ public class CustomerDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 setMap();
-                System.out.println("source:"+map.get("customersource").toString());
+                System.out.println(map.get("customername").toString());
+
+
                 new CustomerService(getApplicationContext()).modifyCustomer(map, 113);
 
                 Intent intent = new Intent(CustomerDetailsActivity.this, CustomerActivity.class);
@@ -94,18 +95,18 @@ public class CustomerDetailsActivity extends AppCompatActivity {
     private void setMap(){
         map.put("customername", ((TextView) findViewById(R.id.name)).getText().toString());
         map.put("customerid", ((TextView) findViewById(R.id.id)).getText().toString());
-        map.put("profile", ((TextView) findViewById(R.id.profile)).getText().toString());
-        map.put("regionid", ((TextView) findViewById(R.id.region)).getText().toString());
-        map.put("parentcustomerid", ((TextView) findViewById(R.id.parentcustomer)).getText().toString());
-        map.put("customersource", ((TextView) findViewById(R.id.source)).getText().toString());
-        map.put("size", ((TextView) findViewById(R.id.company)).getText().toString());
-        map.put("telephone", ((TextView) findViewById(R.id.tel)).getText().toString());
-        map.put("email", ((TextView) findViewById(R.id.email)).getText().toString());
-        map.put("website", ((TextView) findViewById(R.id.website)).getText().toString());
-        map.put("address", ((TextView) findViewById(R.id.address)).getText().toString());
-        map.put("zipcode", ((TextView) findViewById(R.id.zipcode)).getText().toString());
-        map.put("createdate", ((TextView) findViewById(R.id.date)).getText().toString());
-        map.put("customerremarks", ((TextView) findViewById(R.id.remark)).getText().toString());
+//        map.put("profile", ((TextView) findViewById(R.id.profile)).getText().toString());
+//        map.put("regionid", ((TextView) findViewById(R.id.region)).getText().toString());
+//        map.put("parentcustomerid", ((TextView) findViewById(R.id.parentcustomer)).getText().toString());
+//        map.put("customersource", ((TextView) findViewById(R.id.source)).getText().toString());
+//        map.put("size", ((TextView) findViewById(R.id.company)).getText().toString());
+//        map.put("telephone", ((TextView) findViewById(R.id.tel)).getText().toString());
+//        map.put("email", ((TextView) findViewById(R.id.email)).getText().toString());
+//        map.put("website", ((TextView) findViewById(R.id.website)).getText().toString());
+//        map.put("address", ((TextView) findViewById(R.id.address)).getText().toString());
+//        map.put("zipcode", ((TextView) findViewById(R.id.zipcode)).getText().toString());
+//        map.put("createdate", ((TextView) findViewById(R.id.date)).getText().toString());
+//        map.put("customerremarks", ((TextView) findViewById(R.id.remark)).getText().toString());
         map.put("staffid", "113");
 
     }
