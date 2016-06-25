@@ -79,4 +79,9 @@ public class Department implements ParseJSON{
         departmentstatus = info.getInt("departmentstatus");
         departmentremarks = info.getString("departmentremarks");
     }
+
+    @Override
+    public void parse(JSONObject json, int k) throws JSONException {
+
+    }
 }

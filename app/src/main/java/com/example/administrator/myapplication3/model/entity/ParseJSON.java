@@ -8,4 +8,6 @@ import org.json.JSONObject;
  */
 public interface ParseJSON {
     void parse(JSONObject json) throws JSONException;
+
+    void parse(JSONObject json, int k) throws JSONException;
 }

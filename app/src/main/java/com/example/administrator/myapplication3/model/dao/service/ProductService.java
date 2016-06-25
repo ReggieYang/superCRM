@@ -9,6 +9,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.administrator.myapplication3.model.dao.net.MyJsonRequest;
 import com.example.administrator.myapplication3.model.entity.Product;
+import com.example.administrator.myapplication3.model.entity.Product;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -123,6 +124,52 @@ public class ProductService {
         mQueue.add(jsonObjectRequest);
 
     }
+
+
+    public void getProductList(final IUpdateListener<List<Product>> listener){
+        Map<String, String> map= new HashMap<String, String>();
+        map.put("currentpage", "0");
+        final ArrayList<Product> list = new ArrayList<Product>();
+
+        MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/common_product_json"
+                , map,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                        try {
+                            int count = jsonObject.getInt("recordcount");
+
+                            for(int i = 0;i < count;i++){
+                                Product product = new Product();
+                                JSONObject info = jsonObject.getJSONObject(i+"");
+                                product.setProductid(info.getInt("productid"));
+                                product.setClassification(info.getString("classification"));
+                                product.setProductname(info.getString("productname"));
+
+                                list.add(product);
+                                listener.success(true, list);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        System.out.println("errorforvolley");
+                    }
+                }
+        );
+
+
+        RequestQueue mQueue = Volley.newRequestQueue(context);
+        mQueue.add(jsonObjectRequest);
+
+    }
+
 
 
 }

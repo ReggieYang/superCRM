@@ -42,7 +42,7 @@ public class Customer implements ParseJSON {
 
     private int staffid;
 
-    private Date createdate;
+    private String createdate;
 
     private String customerremarks;
 
@@ -64,15 +64,29 @@ public class Customer implements ParseJSON {
         address = info.getString("address");
         zipcode = info.getString("zipcode");
         staffid = info.getInt("staffid");
+        createdate = info.getString("createdate");
+        customerremarks = info.getString("customerremarks");
+    }
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//小写的mm表示的是分钟
-        String dstr = info.getString("createdate");
-        try {
-            createdate = sdf.parse(dstr);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
+    @Override
+    public void parse(JSONObject json, int k) throws JSONException {
+        JSONObject info = json.getJSONObject(k+"");
+        customerid = info.getInt("customerid");
+        customername = info.getString("customername");
+        profile = info.getString("profile");
+        customertype = info.getInt("customertype");
+        customerstatus = info.getInt("customerstatus");
+        regionid = info.getInt("regionid");
+        parentcustomerid = info.getInt("parentcustomerid");
+        customersource = info.getString("customersource");
+        size = info.getInt("size");
+        telephone = info.getString("telephone");
+        email = info.getString("email");
+        website = info.getString("website");
+        address = info.getString("address");
+        zipcode = info.getString("zipcode");
+        staffid = info.getInt("staffid");
+        createdate = info.getString("createdate");
         customerremarks = info.getString("customerremarks");
     }
 
@@ -181,11 +195,11 @@ public class Customer implements ParseJSON {
         this.staffid = staffid;
     }
 
-    public Date getCreatedate() {
+    public String getCreatedate() {
         return createdate;
     }
 
-    public void setCreatedate(Date createdate) {
+    public void setCreatedate(String createdate) {
         this.createdate = createdate;
     }
 

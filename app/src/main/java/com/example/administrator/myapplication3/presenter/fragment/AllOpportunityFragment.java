@@ -22,7 +22,9 @@ import com.example.administrator.myapplication3.model.dao.service.IUpdateListene
 import com.example.administrator.myapplication3.model.dao.service.OpportunityService;
 import com.example.administrator.myapplication3.model.entity.Customer;
 import com.example.administrator.myapplication3.model.entity.Opportunity;
+import com.example.administrator.myapplication3.presenter.activity.customer.CustomerDetailsActivity;
 import com.example.administrator.myapplication3.presenter.activity.opportunity.OpportunityDetailsActivity;
+import com.example.administrator.myapplication3.presenter.adapter.CustomerAdapter;
 import com.example.administrator.myapplication3.presenter.adapter.OpportunityAdapter;
 
 import org.json.JSONObject;
@@ -57,20 +59,37 @@ public class AllOpportunityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_allopportunity, container, false);
 
-        ListView listView = (ListView) rootView.findViewById(R.id.listView);
+        final ListView listView = (ListView) rootView.findViewById(R.id.listView);
 
         OpportunityService os = new OpportunityService(getContext());
-        list = os.getMockList();
 
-        OpportunityAdapter adapter = new OpportunityAdapter(getContext(),list);
+        final OpportunityAdapter adapter = new OpportunityAdapter(getContext(),list);
         listView.setAdapter(adapter);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final Intent intent = new Intent(getActivity(),OpportunityDetailsActivity.class);
+                Intent intent = new Intent(getActivity(), OpportunityDetailsActivity.class);
+                intent.putExtra("id", list.get(position).getOpportunityid() + "");
                 startActivity(intent);
+
             }
         });
+
+        os.getOpportunityList(new IUpdateListener<List<Opportunity>>() {
+            @Override
+            public void success(boolean isSuccess, List<Opportunity> data) {
+                list.clear();
+                list.addAll(data);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void fail(VolleyError error) {
+
+            }
+        });
+
         return rootView;
     }
 }

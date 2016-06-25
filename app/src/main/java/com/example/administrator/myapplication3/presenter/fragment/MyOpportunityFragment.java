@@ -10,6 +10,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.android.volley.VolleyError;
+import com.example.administrator.myapplication3.model.dao.service.IUpdateListener;
 import com.example.administrator.myapplication3.model.dao.service.OpportunityService;
 import com.example.administrator.myapplication3.presenter.activity.opportunity.OpportunityDetailsActivity;
 import com.example.administrator.myapplication3.R;
@@ -41,36 +43,41 @@ public class MyOpportunityFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.fragment_myopportunity, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_myopportunity, container, false);
 
-        ListView listView = (ListView) rootView.findViewById(R.id.listView);
+        final ListView listView = (ListView) rootView.findViewById(R.id.listView);
+
         OpportunityService os = new OpportunityService(getContext());
-        list = os.getMockList2();
 
-        OpportunityAdapter adapter = new OpportunityAdapter(getContext(),list);
+        final OpportunityAdapter adapter = new OpportunityAdapter(getContext(),list);
         listView.setAdapter(adapter);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final Intent intent = new Intent(getActivity(),OpportunityDetailsActivity.class);
+                Intent intent = new Intent(getActivity(), OpportunityDetailsActivity.class);
+                intent.putExtra("id", list.get(position).getOpportunityid() + "");
                 startActivity(intent);
+
             }
         });
-//        final String[] data={"军火商机","大王"};
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,data);
-//        listView.setAdapter(adapter);
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//                String name = data[(int)id];
-//                Intent intent = new Intent(getActivity(),OpportunityDetailsActivity.class);
-//
-//                startActivity(intent);
-//            }
-//        });
+
+        os.getOpportunityList(new IUpdateListener<List<Opportunity>>() {
+            @Override
+            public void success(boolean isSuccess, List<Opportunity> data) {
+                list.clear();
+                list.addAll(data);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void fail(VolleyError error) {
+
+            }
+        });
+
         return rootView;
     }
 }

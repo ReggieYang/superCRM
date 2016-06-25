@@ -10,19 +10,26 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.android.volley.VolleyError;
 import com.example.administrator.myapplication3.model.dao.service.ContractService;
+import com.example.administrator.myapplication3.model.dao.service.ContractService;
+import com.example.administrator.myapplication3.model.dao.service.IUpdateListener;
+import com.example.administrator.myapplication3.model.entity.Contract;
 import com.example.administrator.myapplication3.model.entity.Contract;
 import com.example.administrator.myapplication3.presenter.activity.contract.ContractDetailsActivity;
 import com.example.administrator.myapplication3.R;
+
+import com.example.administrator.myapplication3.presenter.adapter.ContractAdapter;
 import com.example.administrator.myapplication3.presenter.adapter.ContractAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class MyContractFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
 
-    private List<Contract> list;
+    private List<Contract> list = new ArrayList<>();
 
     public MyContractFragment() {
     }
@@ -46,16 +53,32 @@ public class MyContractFragment extends Fragment {
 
         ListView listView = (ListView) rootView.findViewById(R.id.listView);
 
-        list = new ContractService(getContext()).getMockList();
-        ContractAdapter adapter = new ContractAdapter(getContext(), list);
+        ContractService cs = new ContractService(getContext());
 
+        final ContractAdapter adapter = new ContractAdapter(getContext(),list);
         listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(),ContractDetailsActivity.class);
+                Intent intent = new Intent(getActivity(), ContractDetailsActivity.class);
+                intent.putExtra("id", list.get(position).getContractid() + "");
                 startActivity(intent);
+
+            }
+        });
+
+        cs.getContractList(new IUpdateListener<List<Contract>>() {
+            @Override
+            public void success(boolean isSuccess, List<Contract> data) {
+                list.clear();
+                list.addAll(data);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void fail(VolleyError error) {
+
             }
         });
         return rootView;

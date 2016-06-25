@@ -9,27 +9,22 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.android.volley.VolleyError;
 import com.example.administrator.myapplication3.model.dao.service.ContactService;
+import com.example.administrator.myapplication3.model.dao.service.IUpdateListener;
 import com.example.administrator.myapplication3.model.entity.Contact;
 import com.example.administrator.myapplication3.presenter.activity.contact.ContactDetailsActivity;
 import com.example.administrator.myapplication3.R;
 import com.example.administrator.myapplication3.presenter.adapter.ContactAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link MyContactFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link MyContactFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class MyContactFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
 
-    private List<Contact> list;
+    private List<Contact> list = new ArrayList<>();
 
     public MyContactFragment() {
     }
@@ -52,14 +47,33 @@ public class MyContactFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_mycontact, container, false);
 
         ListView listView = (ListView) rootView.findViewById(R.id.listView);
-        list = new ContactService(getContext()).getMockList();
-        ContactAdapter adapter = new ContactAdapter(getContext(), list);
+
+        ContactService cs = new ContactService(getContext());
+
+        final ContactAdapter adapter = new ContactAdapter(getContext(),list);
         listView.setAdapter(adapter);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(),ContactDetailsActivity.class);
+                Intent intent = new Intent(getActivity(), ContactDetailsActivity.class);
+                intent.putExtra("id", list.get(position).getContactsid() + "");
                 startActivity(intent);
+
+            }
+        });
+
+        cs.getContactList(new IUpdateListener<List<Contact>>() {
+            @Override
+            public void success(boolean isSuccess, List<Contact> data) {
+                list.clear();
+                list.addAll(data);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void fail(VolleyError error) {
+
             }
         });
         return rootView;

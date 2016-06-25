@@ -5,7 +5,12 @@ import android.os.Bundle;
 
 import com.example.administrator.myapplication3.R;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ProductDetailsActivity extends AppCompatActivity {
+
+    private Map<String, String> map = new HashMap<String, String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

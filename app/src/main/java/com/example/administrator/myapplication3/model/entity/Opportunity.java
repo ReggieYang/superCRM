@@ -53,12 +53,20 @@ public class Opportunity implements ParseJSON{
         this.successrate = successrate;
     }
 
-    public Date getExpecteddate() {
+    public String getExpecteddate() {
         return expecteddate;
     }
 
-    public void setExpecteddate(Date expecteddate) {
+    public void setExpecteddate(String expecteddate) {
         this.expecteddate = expecteddate;
+    }
+
+    public String getAcquisitiondate() {
+        return acquisitiondate;
+    }
+
+    public void setAcquisitiondate(String acquisitiondate) {
+        this.acquisitiondate = acquisitiondate;
     }
 
     public int getOpportunitystatus() {
@@ -85,13 +93,7 @@ public class Opportunity implements ParseJSON{
         this.businesstype = businesstype;
     }
 
-    public Date getAcquisitiondate() {
-        return acquisitiondate;
-    }
 
-    public void setAcquisitiondate(Date acquisitiondate) {
-        this.acquisitiondate = acquisitiondate;
-    }
 
     public String getOpportunitiessource() {
         return opportunitiessource;
@@ -127,7 +129,7 @@ public class Opportunity implements ParseJSON{
 
     private int successrate;
 
-    private Date expecteddate;
+    private String expecteddate;
 
     private int opportunitystatus;
 
@@ -135,7 +137,7 @@ public class Opportunity implements ParseJSON{
 
     private int businesstype;
 
-    private Date acquisitiondate;
+    private String acquisitiondate;
 
     private String opportunitiessource;
 
@@ -147,7 +149,7 @@ public class Opportunity implements ParseJSON{
     @Override
     public void parse(JSONObject json) throws JSONException {
         JSONObject info = json.getJSONObject("0");
-        opportunityid = info.getInt("opportuntiyid");
+        opportunityid = info.getInt("opportunityid");
         opportunitytitle = info.getString("opportunitytitle");
         customerid = info.getInt("customerid");
         estimatedamount = info.getDouble("estimatedamount");
@@ -160,14 +162,16 @@ public class Opportunity implements ParseJSON{
         staffid = info.getInt("staffid");
         opportunityremarks = info.getString("opportunityremarks");
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//小写的mm表示的是分钟
-        String dstr = info.getString("createdate");
-        try {
-            expecteddate = sdf.parse(info.getString("expecteddate"));
-            acquisitiondate = sdf.parse("acquisitiondate");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        expecteddate = info.getString("expecteddate");
+
+        acquisitiondate = info.getString("acquisitiondate");
+
+
+
+    }
+
+    @Override
+    public void parse(JSONObject json, int k) throws JSONException {
 
     }
 }

@@ -14,6 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -65,15 +66,40 @@ public class CustomerService {
     public void getCustomerList(final IUpdateListener<List<Customer>> listener){
         Map<String, String> map= new HashMap<String, String>();
         map.put("currentpage", "0");
+        final ArrayList<Customer> list = new ArrayList<Customer>();
 
-        System.out.println("get customer list");
         MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/common_customer_json"
                 , map,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
-                        System.out.println("wowworked");
-                        System.out.println("wow"+jsonObject.toString());
+                        try {
+                            int count = jsonObject.getInt("recordcount");
+
+                            for(int i = 0;i < count;i++){
+                                Customer customer = new Customer();
+                                JSONObject info = jsonObject.getJSONObject(i+"");
+                                customer.setCustomerid(info.getInt("customerid"));
+                                customer.setCustomername(info.getString("customername"));
+ //                               customerstatus = info.getInt("customerstatus");
+
+                                customer.setCustomerstatus(-1);
+
+                                if(!info.get("customerstatus").equals(null)){
+                                    customer.setCustomerstatus(info.getInt("customerstatus"));
+                                }
+
+
+                                list.add(customer);
+
+                            }
+
+
+                            listener.success(true, list);
+                            System.out.println("size in service:" + list.size());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
                     }
                 },
@@ -85,7 +111,6 @@ public class CustomerService {
                 }
         );
 
-        System.out.println("after customer list");
 
         RequestQueue mQueue = Volley.newRequestQueue(context);
         mQueue.add(jsonObjectRequest);
@@ -145,25 +170,25 @@ public class CustomerService {
     }
 
 
-    public void modifyCustomer(Customer customer, int staffid){
+    public void modifyCustomer(Map<String, String> map, int staffid){
 
-        Map<String, String> map= new HashMap<String, String>();
-        map.put("customerid", customer.getCustomerid()+"");
-        map.put("customername", customer.getCustomername());
-        map.put("profile", customer.getProfile());
-        map.put("customertype", customer.getCustomertype()+"");
-        map.put("customerstatus", customer.getCustomerstatus()+"");
-        map.put("regionid", customer.getRegionid()+"");
-        map.put("parentcustomerid", customer.getParentcustomerid()+"");
-        map.put("customersource", customer.getCustomersource());
-        map.put("size", customer.getSize()+"");
-        map.put("telephone", customer.getTelephone());
-        map.put("email", customer.getEmail());
-        map.put("website", customer.getWebsite());
-        map.put("address", customer.getAddress());
-        map.put("zipcode", customer.getZipcode());
+//        Map<String, String> map= new HashMap<String, String>();
+//        map.put("customerid", customer.getCustomerid()+"");
+//        map.put("customername", customer.getCustomername());
+//        map.put("profile", customer.getProfile());
+//        map.put("customertype", customer.getCustomertype()+"");
+//        map.put("customerstatus", customer.getCustomerstatus()+"");
+//        map.put("regionid", customer.getRegionid()+"");
+//        map.put("parentcustomerid", customer.getParentcustomerid()+"");
+//        map.put("customersource", customer.getCustomersource());
+//        map.put("size", customer.getSize()+"");
+//        map.put("telephone", customer.getTelephone());
+//        map.put("email", customer.getEmail());
+//        map.put("website", customer.getWebsite());
+//        map.put("address", customer.getAddress());
+//        map.put("zipcode", customer.getZipcode());
         map.put("staffid", staffid + "");
-        map.put("customerremarks", customer.getCustomerremarks());
+//        map.put("customerremarks", customer.getCustomerremarks());
 
         MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/customer_modify_json"
                 , map,

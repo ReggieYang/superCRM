@@ -20,7 +20,7 @@ public class Followup implements ParseJSON{
 
     private int followuptype;
 
-    private Date createtime;
+    private String createtime;
 
     private int creatorid;
 
@@ -60,11 +60,11 @@ public class Followup implements ParseJSON{
         this.followuptype = followuptype;
     }
 
-    public Date getCreatetime() {
+    public String getCreatetime() {
         return createtime;
     }
 
-    public void setCreatetime(Date createtime) {
+    public void setCreatetime(String createtime) {
         this.createtime = createtime;
     }
 
@@ -102,14 +102,13 @@ public class Followup implements ParseJSON{
         creatorid = info.getInt("creatorid");
         content = info.getString("content");
         followupremarks = info.getString("followupremarks");
+        createtime = info.getString("createtime");
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//小写的mm表示的是分钟
-        String dstr = info.getString("createtime");
-        try {
-            createtime = sdf.parse(dstr);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+
+    }
+
+    @Override
+    public void parse(JSONObject json, int k) throws JSONException {
 
     }
 }

@@ -23,9 +23,9 @@ public class Contract implements  ParseJSON{
 
     private double totalamount;
 
-    private Date startdate;
+    private String startdate;
 
-    private Date enddate;
+    private String enddate;
 
     private int contractstatus;
 
@@ -41,7 +41,7 @@ public class Contract implements  ParseJSON{
 
     private int staffid;
 
-    private Date signingdate;
+    private String signingdate;
 
     private String attachment;
 
@@ -87,21 +87,6 @@ public class Contract implements  ParseJSON{
         this.totalamount = totalamount;
     }
 
-    public Date getStartdate() {
-        return startdate;
-    }
-
-    public void setStartdate(Date startdate) {
-        this.startdate = startdate;
-    }
-
-    public Date getEnddate() {
-        return enddate;
-    }
-
-    public void setEnddate(Date enddate) {
-        this.enddate = enddate;
-    }
 
     public int getContractstatus() {
         return contractstatus;
@@ -159,11 +144,27 @@ public class Contract implements  ParseJSON{
         this.staffid = staffid;
     }
 
-    public Date getSigningdate() {
+    public String getStartdate() {
+        return startdate;
+    }
+
+    public void setStartdate(String startdate) {
+        this.startdate = startdate;
+    }
+
+    public String getEnddate() {
+        return enddate;
+    }
+
+    public void setEnddate(String enddate) {
+        this.enddate = enddate;
+    }
+
+    public String getSigningdate() {
         return signingdate;
     }
 
-    public void setSigningdate(Date signingdate) {
+    public void setSigningdate(String signingdate) {
         this.signingdate = signingdate;
     }
 
@@ -191,16 +192,9 @@ public class Contract implements  ParseJSON{
         opportunityid = info.getInt("opportunityid");
         customerid = info.getInt("customerid");
         totalamount = info.getDouble("totalamount");
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//小写的mm表示的是分钟
-        try {
-            startdate = sdf.parse(info.getString("startdate"));
-            enddate = sdf.parse(info.getString("enddate"));
-            signingdate = sdf.parse(info.getString("signingdate"));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
+        startdate = info.getString("startdate");
+        enddate = info.getString("enddate");
+        signingdate = info.getString("signingdate");
         contractstatus = info.getInt("contractstatus");
         contractnumber = info.getString("contractnumber");
         contracttype = info.getInt("contracttype");
@@ -210,6 +204,11 @@ public class Contract implements  ParseJSON{
         staffid = info.getInt("staffid");
         attachment = info.getString("attachment");
         contractremarks = info.getString("contractremarks");
+    }
+
+    @Override
+    public void parse(JSONObject json, int k) throws JSONException {
+
     }
 
 

@@ -188,4 +188,9 @@ public class Contact implements ParseJSON{
         contactsposition = info.getInt("contactsposition");
         contactsremarks = info.getString("contactsremarks");
     }
+
+    @Override
+    public void parse(JSONObject json, int k) throws JSONException {
+
+    }
 }

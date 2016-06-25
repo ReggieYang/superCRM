@@ -123,4 +123,9 @@ public class Product implements ParseJSON{
         productremarks = info.getString("productremarks");
 
     }
+
+    @Override
+    public void parse(JSONObject json, int k) throws JSONException {
+
+    }
 }

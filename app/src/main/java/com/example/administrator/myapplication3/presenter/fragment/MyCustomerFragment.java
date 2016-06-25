@@ -10,7 +10,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.android.volley.VolleyError;
 import com.example.administrator.myapplication3.model.dao.service.CustomerService;
+import com.example.administrator.myapplication3.model.dao.service.IUpdateListener;
 import com.example.administrator.myapplication3.model.entity.Customer;
 import com.example.administrator.myapplication3.presenter.activity.customer.CustomerDetailsActivity;
 import com.example.administrator.myapplication3.R;
@@ -43,24 +45,39 @@ public class MyCustomerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_mycustomer, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_allcustomer, container, false);
 
-        ListView listView = (ListView) rootView.findViewById(R.id.listView);
+        final ListView listView = (ListView) rootView.findViewById(R.id.listView);
+
         CustomerService cs = new CustomerService(getContext());
-        list = cs.getMockList2();
 
-        CustomerAdapter adapter = new CustomerAdapter(getContext(),list);
+        final CustomerAdapter adapter = new CustomerAdapter(getContext(), list);
         listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(),CustomerDetailsActivity.class);
-                intent.putExtra("id",list.get(position).getCustomerid()+"");
-                intent.putExtra("name","Reggie");
+                Intent intent = new Intent(getActivity(), CustomerDetailsActivity.class);
+                intent.putExtra("id", list.get(position).getCustomerid() + "");
                 startActivity(intent);
+
             }
         });
+
+        cs.getCustomerList(new IUpdateListener<List<Customer>>() {
+            @Override
+            public void success(boolean isSuccess, List<Customer> data) {
+                list.clear();
+                list.addAll(data);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void fail(VolleyError error) {
+
+            }
+        });
+
         return rootView;
     }
 }

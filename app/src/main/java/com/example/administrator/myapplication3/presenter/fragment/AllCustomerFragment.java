@@ -67,16 +67,8 @@ public class AllCustomerFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_allcustomer, container, false);
 
         final ListView listView = (ListView) rootView.findViewById(R.id.listView);
-//        String[] data={"老王","小狗","老李","老王","小狗","老李","老王","小狗","老李","老王","小狗","老李","老王","小狗","老李"
-//        ,"老王","小狗","老李","老王","小狗","老李","老王","小狗","老李","老王","小狗","老李"};
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,data);
-//        listView.setAdapter(adapter);
 
-
-        System.out.println("going to get list");
         CustomerService cs = new CustomerService(getContext());
-        list = cs.getMockList();
-
 
         final CustomerAdapter adapter = new CustomerAdapter(getContext(),list);
         listView.setAdapter(adapter);
@@ -86,7 +78,6 @@ public class AllCustomerFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), CustomerDetailsActivity.class);
                 intent.putExtra("id", list.get(position).getCustomerid() + "");
-                intent.putExtra("name", "Reggie");
                 startActivity(intent);
 
             }
@@ -106,24 +97,6 @@ public class AllCustomerFragment extends Fragment {
             }
         });
 
-
-
-
-//        CustomerAdapter adapter = new CustomerAdapter(getContext(),list);
-//        listView.setAdapter(adapter);
-//
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                System.out.println("fragment");
-//
-//                Intent intent = new Intent(getActivity(),CustomerDetailsActivity.class);
-//                intent.putExtra("id",list.get(position).getCustomerid()+"");
-//                intent.putExtra("name","Reggie");
-//                startActivity(intent);
-//
-//            }
-//        });
         return rootView;
     }
 }

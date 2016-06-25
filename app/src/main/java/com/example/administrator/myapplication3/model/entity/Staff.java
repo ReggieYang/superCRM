@@ -3,8 +3,7 @@ package com.example.administrator.myapplication3.model.entity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 
 /**
  * Created by Administrator on 2016/6/21.
@@ -214,5 +213,10 @@ public class Staff implements ParseJSON{
         staffstatus = info.getInt("staffstatus");
         enable = info.getInt("enable");
         staffremarks = info.getString("staffremarks");
+    }
+
+    @Override
+    public void parse(JSONObject json, int k) throws JSONException {
+
     }
 }

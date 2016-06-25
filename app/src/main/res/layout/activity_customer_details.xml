@@ -31,6 +31,29 @@
             android:layout_marginBottom="0dp"
             android:layout_marginLeft="15dp" />
 
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="编号"
+            android:id="@+id/textView30"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="0dp"
+            android:textColor="#1590dd"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/id"
+            android:textSize="16dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginLeft="15dp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -336,7 +359,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="0dp"
             android:layout_marginLeft="20dp"
-            android:text="2016.2.2 22:11" />
+            android:text="" />
 
         <TextView
             android:layout_width="wrap_content"

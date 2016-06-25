@@ -10,6 +10,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.administrator.myapplication3.model.dao.net.MyJsonRequest;
 import com.example.administrator.myapplication3.model.entity.Contract;
 import com.example.administrator.myapplication3.model.entity.Customer;
+import com.example.administrator.myapplication3.model.entity.Contract;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,7 +44,7 @@ public class ContractService {
 
     public void addContract(String name, int customerid, int staffid,int opprotunityid){
         Map<String, String> map= new HashMap<String, String>();
-        map.put("opportunityid", opprotunityid+"");
+        map.put("contractid", opprotunityid+"");
         map.put("customerid", customerid + "");
         map.put("staffid", staffid + "");
         map.put("contracttitle", name);
@@ -93,5 +94,58 @@ public class ContractService {
         mQueue.add(jsonObjectRequest);
 
     }
+
+
+    public void getContractList(final IUpdateListener<List<Contract>> listener){
+        Map<String, String> map= new HashMap<String, String>();
+        map.put("currentpage", "0");
+        final ArrayList<Contract> list = new ArrayList<Contract>();
+
+        MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/common_contract_json"
+                , map,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                        try {
+                            int count = jsonObject.getInt("recordcount");
+                            System.out.println("count" + count);
+                            for(int i = 0;i < count;i++){
+                                Contract contract = new Contract();
+                                JSONObject info = jsonObject.getJSONObject(i+"");
+                                contract.setContractid(info.getInt("contractid"));
+                                contract.setContracttitle(info.getString("contracttitle"));
+                                contract.setContractstatus(-1);
+
+                                if(!info.get("contractstatus").equals(null)){
+                                    contract.setContractstatus(info.getInt("contractstatus"));
+                                }
+
+                                list.add(contract);
+                                listener.success(true, list);
+                            }
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        System.out.println("errorforvolley");
+                    }
+                }
+        );
+
+
+        RequestQueue mQueue = Volley.newRequestQueue(context);
+        mQueue.add(jsonObjectRequest);
+
+    }
+
+
 
 }
