@@ -54,7 +54,8 @@
             android:layout_marginTop="0dp"
             android:layout_marginBottom="0dp"
             android:layout_marginLeft="15dp"
-            android:inputType="number" />
+            android:inputType="number"
+            android:text="100" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -131,20 +132,27 @@
             android:id="@+id/textView19"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="0dp"
+            android:layout_marginBottom="5dp"
             android:textColor="#1590dd"
             android:textSize="16dp" />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/signingdate"
-            android:textSize="16dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginBottom="0dp"
-            android:layout_marginLeft="15dp"
-            android:text="2016-06-30" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_gravity="center_horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/datePickButton"
+                android:layout_marginLeft="15dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/timePickButton"
+                android:layout_marginLeft="110dp" />
+        </RelativeLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -205,16 +213,23 @@
             android:textColor="#1590dd"
             android:textSize="16dp" />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/acquisitiondate"
-            android:textSize="16dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginBottom="0dp"
-            android:layout_marginLeft="15dp"
-            android:text="2016-06-30" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_gravity="center_horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/acdate"
+                android:layout_marginLeft="15dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/actime"
+                android:layout_marginLeft="110dp" />
+        </RelativeLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -285,6 +300,7 @@
             android:layout_marginBottom="0dp"
             android:layout_marginLeft="15dp"
             android:text="remark" />
+
 
         <Button
             android:layout_width="wrap_content"
