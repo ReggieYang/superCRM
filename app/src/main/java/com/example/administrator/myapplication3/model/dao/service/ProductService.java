@@ -40,10 +40,10 @@ public class ProductService {
         return list;
     }
 
-    public void addProduct(String name){
+    public void addProduct(Map<String, String> map){
 
-        Map<String, String> map= new HashMap<String, String>();
-        map.put("productname", name);
+//        Map<String, String> map= new HashMap<String, String>();
+//        map.put("productname", name);
 
         MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/product_create_json"
                 , map,
@@ -90,19 +90,19 @@ public class ProductService {
     }
 
 
-    public void modifyProduct(Product product){
+    public void modifyProduct(Map<String, String> map){
 
-        Map<String, String> map= new HashMap<String, String>();
-        map.put("productname", product.getProductname());
-        map.put("productid", product.getProductid()+"");
-        map.put("productsn", product.getProductsn());
-        map.put("standardprice", product.getStandardprice()+"");
-        map.put("salesunit", product.getSalesunit());
-        map.put("unitcost", product.getUnitcost()+"");
-        map.put("classification", product.getClassification());
-        map.put("picture", product.getPitcure());
-        map.put("introduction", product.getIntroduction());
-        map.put("productremarks", product.getProductremarks());
+//        Map<String, String> map= new HashMap<String, String>();
+//        map.put("productname", product.getProductname());
+//        map.put("productid", product.getProductid()+"");
+//        map.put("productsn", product.getProductsn());
+//        map.put("standardprice", product.getStandardprice()+"");
+//        map.put("salesunit", product.getSalesunit());
+//        map.put("unitcost", product.getUnitcost()+"");
+//        map.put("classification", product.getClassification());
+//        map.put("picture", product.getPitcure());
+//        map.put("introduction", product.getIntroduction());
+//        map.put("productremarks", product.getProductremarks());
 
         MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/product_modify_json"
                 , map,

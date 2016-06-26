@@ -36,35 +36,20 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     private Map<String, String> map = new HashMap<String, String>();
 
-
-    /**
-     * 从服务器取图片
-     *http://bbs.3gstdy.com
-     * @param url
-     * @return
-     */
-    public static Bitmap getHttpBitmap(String url) {
-        URL myFileUrl = null;
-        Bitmap bitmap = null;
-        try {
-
-            myFileUrl = new URL(url);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        try {
-            HttpURLConnection conn = (HttpURLConnection) myFileUrl.openConnection();
-            conn.setConnectTimeout(0);
-            conn.setDoInput(true);
-            conn.connect();
-            InputStream is = conn.getInputStream();
-            bitmap = BitmapFactory.decodeStream(is);
-            is.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return bitmap;
+    private void setMap(){
+        map.put("productname", ((TextView) findViewById(R.id.name)).getText().toString());
+        map.put("productsn", ((TextView) findViewById(R.id.sn)).getText().toString());
+        map.put("standardprice", ((TextView) findViewById(R.id.price)).getText().toString());
+        map.put("salesunit", ((TextView) findViewById(R.id.unit)).getText().toString());
+        map.put("unitcost", ((TextView) findViewById(R.id.cost)).getText().toString());
+        map.put("classification", ((TextView) findViewById(R.id.classification)).getText().toString());
+        map.put("introduction", ((TextView) findViewById(R.id.introduction)).getText().toString());
+        map.put("remark", ((TextView) findViewById(R.id.remark)).getText().toString());
+        map.put("productid", ((TextView) findViewById(R.id.id)).getText().toString());
     }
+
+
+
 
 
     @Override
@@ -72,18 +57,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
 
-//        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-//                .detectDiskReads().detectDiskWrites().detectNetwork()
-//                .penaltyLog().build());
-//        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
-//                .detectLeakedSqlLiteObjects().detectLeakedClosableObjects()
-//                .penaltyLog().penaltyDeath().build());
 
         final ImageView imageView = (ImageView) findViewById(R.id.productpicture);
-//        Bitmap bitmap =  getHttpBitmap("http://img4.duitang.com/uploads/item/201407/08/20140708101547_c8MAA.jpeg");
-//        image1.setImageBitmap(bitmap);
-
-
 
         ImageRequest imageRequest = new ImageRequest(
                 "http://img4.duitang.com/uploads/item/201407/08/20140708101547_c8MAA.jpeg",
@@ -110,12 +85,9 @@ public class ProductDetailsActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                setMap();
-//                System.out.println(map.get("productname").toString());
-//
-//
-//                new ProductService(getApplicationContext()).modifyProduct(map, 113);
-
+                setMap();
+                System.out.println(map.get("productname").toString());
+                new ProductService(getApplicationContext()).modifyProduct(map);
                 Intent intent = new Intent(ProductDetailsActivity.this, ProductActivity.class);
                 startActivity(intent);
             }

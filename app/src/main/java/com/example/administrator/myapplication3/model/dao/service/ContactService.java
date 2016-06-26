@@ -42,12 +42,12 @@ public class ContactService {
     }
 
 
-    public void addContact(String name, int contactid){
+    public void addContact(Map<String, String> map){
 
-        Map<String, String> map= new HashMap<String, String>();
-        map.put("contactsname", name);
-        map.put("contactid", contactid + "");
-
+//        Map<String, String> map= new HashMap<String, String>();
+//        map.put("contactsname", name);
+//        map.put("contactid", contactid + "");
+        System.out.println(map.get("contactsname").toString()+"zzzz"+map.get("customerid"));
 
         MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/contact_create_json"
                 , map,
