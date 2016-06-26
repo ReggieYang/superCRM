@@ -84,8 +84,7 @@ public class OpportunityDetailsActivity extends AppCompatActivity {
 
                 new OpportunityService(getApplicationContext()).modifyOpportunity(map);
 
-                Intent intent = new Intent(OpportunityDetailsActivity.this, OpportunityActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 

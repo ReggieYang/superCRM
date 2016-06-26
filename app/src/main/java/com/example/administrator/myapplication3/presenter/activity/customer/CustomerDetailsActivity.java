@@ -50,8 +50,7 @@ public class CustomerDetailsActivity extends AppCompatActivity {
 
                 new CustomerService(getApplicationContext()).modifyCustomer(map);
 
-                Intent intent = new Intent(CustomerDetailsActivity.this, CustomerActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 

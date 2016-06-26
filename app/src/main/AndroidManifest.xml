@@ -37,7 +37,6 @@
             android:label="合同管理"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:launchMode="singleTop"
             android:name=".presenter.activity.product.ProductActivity"
             android:label="产品管理"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -69,7 +68,6 @@
             android:label="联系人详情" />
         <activity
             android:name=".presenter.activity.product.ProductDetailsActivity"
-            android:launchMode="singleTop"
             android:label="产品详情" />
         <activity
             android:name=".presenter.activity.opportunity.OpportunityDetailsActivity"

@@ -78,8 +78,7 @@ public class ContractDetailsActivity extends AppCompatActivity {
 
                 new ContractService(getApplicationContext()).modifyContract(map);
 
-                Intent intent = new Intent(ContractDetailsActivity.this, ContractActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 

@@ -30,6 +30,14 @@ public class AllProductFragment extends Fragment {
 
     private List<Product> list = new ArrayList<>();
 
+    ProductAdapter adapter;
+
+
+    LayoutInflater inflater2;
+    ViewGroup container2;
+    Bundle savedInstanceState2;
+    View rootView;
+
     public AllProductFragment() {
     }
 
@@ -46,29 +54,10 @@ public class AllProductFragment extends Fragment {
     }
 
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_allproduct, container, false);
-
-        ListView listView = (ListView) rootView.findViewById(R.id.listView);
-
+    public void onResume(){
+        super.onResume();
         ProductService cs = new ProductService(getContext());
-
-        final ProductAdapter adapter = new ProductAdapter(getContext(),list);
-        listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
-                intent.putExtra("id", list.get(position).getProductid() + "");
-                startActivity(intent);
-            }
-        });
-
-
 
         cs.getProductList(new IUpdateListener<List<Product>>() {
             @Override
@@ -76,6 +65,7 @@ public class AllProductFragment extends Fragment {
                 list.clear();
                 list.addAll(data);
                 adapter.notifyDataSetChanged();
+                System.out.println("pname:"+list.get(3).getProductname());
             }
 
             @Override
@@ -83,29 +73,54 @@ public class AllProductFragment extends Fragment {
 
             }
         });
+    }
 
 
-//        for(int i = 0;i < 2;i++) {
-//
-//            cs.getProductListpage(i, new IUpdateListener<List<Product>>() {
-//                @Override
-//                public void success(boolean isSuccess, List<Product> data) {
-//                    list.addAll(data);
-//                    count++;
-//                    if(count == 2){
-//                        adapter.notifyDataSetChanged();
-//                    }
-////                    list.clear();
-//
-//
-//                }
-//
-//                @Override
-//                public void fail(VolleyError error) {
-//
-//                }
-//            });
-//        }
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        if (null != rootView) {
+            ViewGroup parent = (ViewGroup) rootView.getParent();
+            if (null != parent) {
+                parent.removeView(rootView);
+            }
+        } else {
+            System.out.println("yangkaimao");
+            rootView = inflater.inflate(R.layout.fragment_allproduct, container, false);
+
+            ListView listView = (ListView) rootView.findViewById(R.id.listView);
+
+            ProductService cs = new ProductService(getContext());
+
+            adapter = new ProductAdapter(getContext(),list);
+            listView.setAdapter(adapter);
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
+                    intent.putExtra("id", list.get(position).getProductid() + "");
+                    startActivity(intent);
+                }
+            });
+
+
+            cs.getProductList(new IUpdateListener<List<Product>>() {
+                @Override
+                public void success(boolean isSuccess, List<Product> data) {
+                    list.clear();
+                    list.addAll(data);
+                    adapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void fail(VolleyError error) {
+
+                }
+            });
+        }
+
+
 
         return rootView;
     }

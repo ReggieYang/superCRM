@@ -56,8 +56,9 @@ public class ContactDetailsActivity extends AppCompatActivity {
                 setMap();
 
                 new ContactService(getApplicationContext()).modifyContact(map);
-                Intent intent = new Intent(ContactDetailsActivity.this, ContactActivity.class);
-                startActivity(intent);
+                finish();
+//                Intent intent = new Intent(ContactDetailsActivity.this, ContactActivity.class);
+//                startActivity(intent);
             }
         });
 

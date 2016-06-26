@@ -68,8 +68,9 @@ public class ProductDetailsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 setMap();
                 new ProductService(getApplicationContext()).modifyProduct(map);
-                Intent intent = new Intent(ProductDetailsActivity.this, ProductActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(ProductDetailsActivity.this, ProductActivity.class);
+//                startActivity(intent);
+                finish();
             }
         });
 

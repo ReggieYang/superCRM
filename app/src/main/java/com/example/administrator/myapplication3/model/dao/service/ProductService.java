@@ -131,7 +131,6 @@ public class ProductService {
     public void getProductList(final IUpdateListener<List<Product>> listener){
         Map<String, String> map= new HashMap<String, String>();
         map.put("currentpage", "0");
-        map.put("staffid", "155");
         //读取第0页
         final ArrayList<Product> list = new ArrayList<Product>();
 
@@ -151,10 +150,10 @@ public class ProductService {
                                 product.setClassification(info.getString("classification"));
                                 product.setProductname(info.getString("productname"));
                                 list.add(product);
-                                listener.success(true, list);
+
 
                             }
-
+                            listener.success(true, list);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -199,9 +198,9 @@ public class ProductService {
                                 product.setProductname(info.getString("productname"));
 
                                 list.add(product);
-                                listener.success(true, list);
-                            }
 
+                            }
+                            listener.success(true, list);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
