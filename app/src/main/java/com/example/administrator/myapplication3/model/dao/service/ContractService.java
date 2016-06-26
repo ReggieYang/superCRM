@@ -50,11 +50,14 @@ public class ContractService {
 //        map.put("contracttitle", name);
 
 
+
+
         MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/contract_create_json"
                 , map,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
+
                     }
                 },
                 new Response.ErrorListener() {

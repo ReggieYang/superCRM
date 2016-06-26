@@ -170,7 +170,7 @@ public class CustomerService {
     }
 
 
-    public void modifyCustomer(Map<String, String> map, int staffid){
+    public void modifyCustomer(Map<String, String> map){
 
 //        Map<String, String> map= new HashMap<String, String>();
 //        map.put("customerid", customer.getCustomerid()+"");
@@ -190,6 +190,9 @@ public class CustomerService {
 //        map.put("staffid", staffid + "");
 
 //        map.put("customerremarks", customer.getCustomerremarks());
+
+
+
 
         MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/customer_modify_json"
                 , map,

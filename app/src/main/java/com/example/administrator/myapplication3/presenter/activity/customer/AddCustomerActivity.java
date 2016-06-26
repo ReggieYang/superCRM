@@ -19,7 +19,9 @@ import com.example.administrator.myapplication3.R;
 import com.example.administrator.myapplication3.model.dao.service.CustomerService;
 import com.example.administrator.myapplication3.model.entity.Customer;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,6 +70,9 @@ public class AddCustomerActivity extends AppCompatActivity {
         map.put("staffid", ((TextView) findViewById(R.id.staff)).getText().toString());
         map.put("customertype", ((Spinner) findViewById(R.id.type)).getSelectedItemPosition()+1+"");
         map.put("customerstatus", ((Spinner) findViewById(R.id.status)).getSelectedItemPosition()+1+"");
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String currentdate = sdf.format(new Date());
+        map.put("createdate", currentdate);
     }
 
     private void setSpinner(int ctype, int cstatus){

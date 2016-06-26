@@ -126,7 +126,7 @@ public class AddOpportunityActivity extends AppCompatActivity {
                 year = year2;
                 month = monthOfYear+1;
                 day = dayOfMonth;
-                System.out.println("---> 设置后: year="+year2+", month="+monthOfYear+",day="+dayOfMonth);
+
             }
         };
 
@@ -137,7 +137,7 @@ public class AddOpportunityActivity extends AppCompatActivity {
                 mTimePickerButton.setText(hourOfDay + ":" + minute2 + ":00");
                 hour = hourOfDay;
                 minute = minute2;
-                System.out.println("---> 设置后: hour="+hourOfDay+",minute="+minute2);
+
             }
         };
 
@@ -150,7 +150,7 @@ public class AddOpportunityActivity extends AppCompatActivity {
                 year = year2;
                 month = monthOfYear+1;
                 day = dayOfMonth;
-                System.out.println("---> 设置后: year="+year2+", month="+monthOfYear+",day="+dayOfMonth);
+
             }
         };
 
@@ -161,7 +161,7 @@ public class AddOpportunityActivity extends AppCompatActivity {
                 actime.setText(hourOfDay + ":" + minute2 + ":00");
                 hour = hourOfDay;
                 minute = minute2;
-                System.out.println("---> 设置后: hour="+hourOfDay+",minute="+minute2);
+
             }
         };
 
@@ -242,7 +242,6 @@ public class AddOpportunityActivity extends AppCompatActivity {
 
     @Override
     protected Dialog onCreateDialog(int id) {
-        System.out.println("---> onCreateDialog()");
         getCurrentTime();
         switch (id) {
             case DATE_PICKER:
@@ -316,7 +315,7 @@ public class AddOpportunityActivity extends AppCompatActivity {
         day = calendar.get(Calendar.DAY_OF_MONTH);
         hour = calendar.get(Calendar.HOUR_OF_DAY);
         minute = calendar.get(Calendar.MINUTE);
-        System.out.println("-----> 获取当前时间 year="+year+",month="+month+",day="+day+",hour="+hour+",minute="+minute);
+
     }
 
 

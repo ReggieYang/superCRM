@@ -144,7 +144,6 @@ public class OpportunityDetailsActivity extends AppCompatActivity {
     }
 
     private void init(String ed, String ad){
-        System.out.println("ddd:"+ed+ad);
         String[] eds = ed.split(" ");
 
         mDatePickerButton=(Button) findViewById(R.id.datePickButton);
@@ -176,7 +175,7 @@ public class OpportunityDetailsActivity extends AppCompatActivity {
                 year = year2;
                 month = monthOfYear+1;
                 day = dayOfMonth;
-                System.out.println("---> 设置后: year="+year2+", month="+monthOfYear+",day="+dayOfMonth);
+
             }
         };
 
@@ -187,7 +186,7 @@ public class OpportunityDetailsActivity extends AppCompatActivity {
                 mTimePickerButton.setText(hourOfDay + ":" + minute2 + ":00");
                 hour = hourOfDay;
                 minute = minute2;
-                System.out.println("---> 设置后: hour="+hourOfDay+",minute="+minute2);
+
             }
         };
 
@@ -200,7 +199,7 @@ public class OpportunityDetailsActivity extends AppCompatActivity {
                 year = year2;
                 month = monthOfYear+1;
                 day = dayOfMonth;
-                System.out.println("---> 设置后: year="+year2+", month="+monthOfYear+",day="+dayOfMonth);
+
             }
         };
 
@@ -211,7 +210,7 @@ public class OpportunityDetailsActivity extends AppCompatActivity {
                 actime.setText(hourOfDay + ":" + minute2 + ":00");
                 hour = hourOfDay;
                 minute = minute2;
-                System.out.println("---> 设置后: hour="+hourOfDay+",minute="+minute2);
+
             }
         };
 
@@ -292,8 +291,8 @@ public class OpportunityDetailsActivity extends AppCompatActivity {
 
     @Override
     protected Dialog onCreateDialog(int id) {
-        System.out.println("---> onCreateDialog()");
-//        getCurrentTime();
+
+
         switch (id) {
             case DATE_PICKER:
                 String ed = mDatePickerButton.getText().toString();
@@ -377,21 +376,7 @@ public class OpportunityDetailsActivity extends AppCompatActivity {
         isCreatePickerDialog = false;
     }
 
-    private void getCurrentTime(){
-        //设置时间为中国
-        calendar = Calendar.getInstance(Locale.CHINA);
-        //获取日期
-        year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH);
-        day = calendar.get(Calendar.DAY_OF_MONTH);
-        hour = calendar.get(Calendar.HOUR_OF_DAY);
-        minute = calendar.get(Calendar.MINUTE);
-        System.out.println("-----> 获取当前时间 year=" + year + ",month=" + month + ",day=" + day + ",hour=" + hour + ",minute=" + minute);
-    }
 
-    private void getAcdate(){
-
-    }
 
 
 

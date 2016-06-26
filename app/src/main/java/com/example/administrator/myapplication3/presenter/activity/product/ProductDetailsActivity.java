@@ -60,22 +60,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         final ImageView imageView = (ImageView) findViewById(R.id.productpicture);
 
-        ImageRequest imageRequest = new ImageRequest(
-                "http://img4.duitang.com/uploads/item/201407/08/20140708101547_c8MAA.jpeg",
-                new Response.Listener<Bitmap>() {
-                    @Override
-                    public void onResponse(Bitmap response) {
-                        imageView.setImageBitmap(response);
-                    }
-                }, 0, 0, Bitmap.Config.RGB_565, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                imageView.setImageResource(R.drawable.busbtn);
-            }
-        });
 
-        RequestQueue mQueue = Volley.newRequestQueue(getApplicationContext());
-        mQueue.add(imageRequest);
 
         int id = Integer.parseInt(getIntent().getStringExtra("id"));
 
@@ -105,6 +90,25 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 (((TextView) findViewById(R.id.remark))).setText(data.getProductremarks());
                 (((TextView) findViewById(R.id.introduction))).setText(data.getIntroduction());
                 (((TextView) findViewById(R.id.id))).setText(data.getProductid() + "");
+
+
+                ImageRequest imageRequest = new ImageRequest(
+                        data.getPitcure(),
+                        new Response.Listener<Bitmap>() {
+                            @Override
+                            public void onResponse(Bitmap response) {
+                                imageView.setImageBitmap(response);
+                            }
+                        }, 0, 0, Bitmap.Config.RGB_565, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+
+                RequestQueue mQueue = Volley.newRequestQueue(getApplicationContext());
+                mQueue.add(imageRequest);
+
             }
 
             @Override
