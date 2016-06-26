@@ -116,6 +116,61 @@ public class CustomerService {
 
     }
 
+
+    public void getMyCustomerList(final IUpdateListener<List<Customer>> listener){
+        Map<String, String> map= new HashMap<String, String>();
+        map.put("currentpage", "0");
+        map.put("staffid", "155");
+        final ArrayList<Customer> list = new ArrayList<Customer>();
+
+        MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/common_customer_json"
+                , map,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                        try {
+                            int count = jsonObject.getInt("recordcount");
+
+                            for(int i = 0;i < count;i++){
+                                Customer customer = new Customer();
+                                JSONObject info = jsonObject.getJSONObject(i+"");
+                                customer.setCustomerid(info.getInt("customerid"));
+                                customer.setCustomername(info.getString("customername"));
+
+                                customer.setCustomerstatus(-1);
+
+                                if(!info.get("customerstatus").equals(null)){
+                                    customer.setCustomerstatus(info.getInt("customerstatus"));
+                                }
+
+
+                                list.add(customer);
+
+                            }
+
+
+                            listener.success(true, list);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+
+                    }
+                }
+        );
+
+
+        RequestQueue mQueue = Volley.newRequestQueue(context);
+        mQueue.add(jsonObjectRequest);
+
+    }
+
     public void getCustomer(int id,final IUpdateListener<Customer> listener){
         final Customer customer = new Customer();
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/customer_query_json?customerid="+id, null,

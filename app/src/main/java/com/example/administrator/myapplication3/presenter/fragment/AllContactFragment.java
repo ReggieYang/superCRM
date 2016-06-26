@@ -61,7 +61,6 @@ public class AllContactFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), ContactDetailsActivity.class);
                 intent.putExtra("id", list.get(position).getContactsid() + "");
                 startActivity(intent);
-
             }
         });
 

@@ -59,7 +59,6 @@ public class MyProductFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
                 intent.putExtra("id", list.get(position).getProductid() + "");
                 startActivity(intent);
-
             }
         });
 

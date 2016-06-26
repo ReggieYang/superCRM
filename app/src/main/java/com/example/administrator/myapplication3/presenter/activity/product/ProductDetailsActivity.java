@@ -34,6 +34,7 @@ import java.util.Map;
 
 public class ProductDetailsActivity extends AppCompatActivity {
 
+
     private Map<String, String> map = new HashMap<String, String>();
 
     private void setMap(){
@@ -57,10 +58,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
 
-
         final ImageView imageView = (ImageView) findViewById(R.id.productpicture);
-
-
 
         int id = Integer.parseInt(getIntent().getStringExtra("id"));
 

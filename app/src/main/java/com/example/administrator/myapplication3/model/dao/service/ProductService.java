@@ -25,6 +25,8 @@ import java.util.Map;
 public class ProductService {
     Context context;
 
+    public List<Product> plist;
+
     public ProductService(Context context) {
         this.context = context;
     }
@@ -129,6 +131,8 @@ public class ProductService {
     public void getProductList(final IUpdateListener<List<Product>> listener){
         Map<String, String> map= new HashMap<String, String>();
         map.put("currentpage", "0");
+        map.put("staffid", "155");
+        //读取第0页
         final ArrayList<Product> list = new ArrayList<Product>();
 
         MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/common_product_json"
@@ -136,6 +140,54 @@ public class ProductService {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
+                        //总页数在这个jsonobject里面可以得到
+                        try {
+                            int count = jsonObject.getInt("recordcount");
+
+                            for(int i = 0;i < count;i++){
+                                Product product = new Product();
+                                JSONObject info = jsonObject.getJSONObject(i+"");
+                                product.setProductid(info.getInt("productid"));
+                                product.setClassification(info.getString("classification"));
+                                product.setProductname(info.getString("productname"));
+                                list.add(product);
+                                listener.success(true, list);
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+
+                    }
+                }
+        );
+
+
+        RequestQueue mQueue = Volley.newRequestQueue(context);
+        mQueue.add(jsonObjectRequest);
+
+    }
+
+
+    public void getProductListpage(int page, final IUpdateListener<List<Product>> listener){
+        Map<String, String> map= new HashMap<String, String>();
+        map.put("currentpage", page+"");
+        //读取第0页
+        final ArrayList<Product> list = new ArrayList<Product>();
+
+        MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/common_product_json"
+                , map,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                        //总页数在这个jsonobject里面可以得到
                         try {
                             int count = jsonObject.getInt("recordcount");
 
@@ -169,6 +221,11 @@ public class ProductService {
         mQueue.add(jsonObjectRequest);
 
     }
+
+
+
+
+
 
 
 

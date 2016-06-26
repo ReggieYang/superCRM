@@ -60,11 +60,10 @@ public class MyCustomerFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), CustomerDetailsActivity.class);
                 intent.putExtra("id", list.get(position).getCustomerid() + "");
                 startActivity(intent);
-
             }
         });
 
-        cs.getCustomerList(new IUpdateListener<List<Customer>>() {
+        cs.getMyCustomerList(new IUpdateListener<List<Customer>>() {
             @Override
             public void success(boolean isSuccess, List<Customer> data) {
                 list.clear();

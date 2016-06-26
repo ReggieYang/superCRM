@@ -79,7 +79,6 @@ public class AllCustomerFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), CustomerDetailsActivity.class);
                 intent.putExtra("id", list.get(position).getCustomerid() + "");
                 startActivity(intent);
-
             }
         });
 

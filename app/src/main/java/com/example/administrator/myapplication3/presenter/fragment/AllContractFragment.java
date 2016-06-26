@@ -60,7 +60,6 @@ public class AllContractFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), ContractDetailsActivity.class);
                 intent.putExtra("id", list.get(position).getContractid() + "");
                 startActivity(intent);
-
             }
         });
 

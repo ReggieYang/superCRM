@@ -60,7 +60,6 @@ public class MyOpportunityFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), OpportunityDetailsActivity.class);
                 intent.putExtra("id", list.get(position).getOpportunityid() + "");
                 startActivity(intent);
-
             }
         });
 

@@ -183,7 +183,56 @@ public class OpportunityService {
         mQueue.add(jsonObjectRequest);
 
     }
-    
+
+
+    public void getMyOpportunityList(final IUpdateListener<List<Opportunity>> listener){
+        Map<String, String> map= new HashMap<String, String>();
+        map.put("currentpage", "0");
+        map.put("staffid", "155");
+        final ArrayList<Opportunity> list = new ArrayList<Opportunity>();
+
+        MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/common_opportunity_json"
+                , map,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                        try {
+                            int count = jsonObject.getInt("recordcount");
+
+                            for(int i = 0;i < count;i++){
+                                Opportunity opportunity = new Opportunity();
+                                JSONObject info = jsonObject.getJSONObject(i+"");
+                                opportunity.setOpportunityid(info.getInt("opportunityid"));
+                                opportunity.setOpportunitytitle(info.getString("opportunitytitle"));
+                                opportunity.setOpportunitystatus(-1);
+
+                                if(!info.get("opportunitystatus").equals(null)){
+                                    opportunity.setOpportunitystatus(info.getInt("opportunitystatus"));
+                                }
+
+                                list.add(opportunity);
+                                listener.success(true, list);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+
+                    }
+                }
+        );
+
+
+        RequestQueue mQueue = Volley.newRequestQueue(context);
+        mQueue.add(jsonObjectRequest);
+
+    }
     
 
 

@@ -45,6 +45,8 @@ public class AllProductFragment extends Fragment {
         return fragment;
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -63,9 +65,10 @@ public class AllProductFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
                 intent.putExtra("id", list.get(position).getProductid() + "");
                 startActivity(intent);
-
             }
         });
+
+
 
         cs.getProductList(new IUpdateListener<List<Product>>() {
             @Override
@@ -80,6 +83,30 @@ public class AllProductFragment extends Fragment {
 
             }
         });
+
+
+//        for(int i = 0;i < 2;i++) {
+//
+//            cs.getProductListpage(i, new IUpdateListener<List<Product>>() {
+//                @Override
+//                public void success(boolean isSuccess, List<Product> data) {
+//                    list.addAll(data);
+//                    count++;
+//                    if(count == 2){
+//                        adapter.notifyDataSetChanged();
+//                    }
+////                    list.clear();
+//
+//
+//                }
+//
+//                @Override
+//                public void fail(VolleyError error) {
+//
+//                }
+//            });
+//        }
+
         return rootView;
     }
 }
