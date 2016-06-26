@@ -81,7 +81,6 @@ public class CustomerService {
                                 JSONObject info = jsonObject.getJSONObject(i+"");
                                 customer.setCustomerid(info.getInt("customerid"));
                                 customer.setCustomername(info.getString("customername"));
- //                               customerstatus = info.getInt("customerstatus");
 
                                 customer.setCustomerstatus(-1);
 
