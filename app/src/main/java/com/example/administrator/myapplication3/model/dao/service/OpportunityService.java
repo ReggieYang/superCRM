@@ -67,15 +67,30 @@ public class OpportunityService {
     }
 
 
-    public void addOpportunity(String name, int opportunityid, int staffid){
-
-        Map<String, String> map= new HashMap<String, String>();
-        map.put("opportunitytitle", name);
-        map.put("opportunityid", opportunityid + "");
-        map.put("staffid", staffid + "");
-
+    public void addOpportunity(Map<String, String> map){
 
         MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/opportunity_create_json"
+                , map,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                    }
+                }
+        );
+
+        RequestQueue mQueue = Volley.newRequestQueue(context);
+        mQueue.add(jsonObjectRequest);
+    }
+
+
+
+    public void modifyOpportunity(Map<String, String> map){
+        MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/opportunity_modify_json"
                 , map,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -101,7 +116,6 @@ public class OpportunityService {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            System.out.println(response);
                             opportunity.parse(response);
                             listener.success(true, opportunity);
 
@@ -159,7 +173,7 @@ public class OpportunityService {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        System.out.println("errorforvolley");
+
                     }
                 }
         );
@@ -171,47 +185,7 @@ public class OpportunityService {
     }
     
     
-//    public void modifyOpportunity(Opportunity opportunity, int staffid, int opportunityid){
-//
-//        Map<String, String> map= new HashMap<String, String>();
-//        map.put("opportunityid", opportunityid);
-//        map.put("opportunityid", opportunity.getOpportunityid()+"");
-//        map.put("opportunitytitle", opportunity.getOpportunitytitle());
-//        map.put("profile", opportunity.getProfile());
-//        map.put("opportunitytype", opportunity.getOpportunitytype()+"");
-//        map.put("opportunitystatus", opportunity.getOpportunitystatus()+"");
-//        map.put("regionid", opportunity.getRegionid()+"");
-//        map.put("parentopportunityid", opportunity.getParentopportunityid()+"");
-//        map.put("opportunitysource", opportunity.getOpportunitysource());
-//        map.put("size", opportunity.getSize()+"");
-//        map.put("telephone", opportunity.getTelephone());
-//        map.put("email", opportunity.getEmail());
-//        map.put("website", opportunity.getWebsite());
-//        map.put("address", opportunity.getAddress());
-//        map.put("zipcode", opportunity.getZipcode());
-//        map.put("staffid", staffid + "");
-//        map.put("opportunityremarks", opportunity.getOpportunityremarks());
-//
-//        MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/opportunity_modify_json"
-//                , map,
-//                new Response.Listener<JSONObject>() {
-//                    @Override
-//                    public void onResponse(JSONObject jsonObject) {
-//
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError volleyError) {
-//                        System.out.print(volleyError);
-//                    }
-//                }
-//        );
-//
-//        RequestQueue mQueue = Volley.newRequestQueue(context);
-//        mQueue.add(jsonObjectRequest);
-//
-//    }
+
 
 
 }

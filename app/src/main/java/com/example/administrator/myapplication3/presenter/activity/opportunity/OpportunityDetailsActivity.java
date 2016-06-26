@@ -46,14 +46,14 @@ public class OpportunityDetailsActivity extends AppCompatActivity {
 //        int id = Integer.parseInt(getIntent().getStringExtra("id"));
 
         int id = 159;
-        System.out.println(id);
+
 
         Button button = (Button)findViewById(R.id.modify);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setMap();
-                System.out.println("source:" + map.get("customersource").toString());
+
  //               new OpportunityService(getApplicationContext()).modifyOpportunity(map, 113);
 
                 Intent intent = new Intent(OpportunityDetailsActivity.this, OpportunityActivity.class);

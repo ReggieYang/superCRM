@@ -42,15 +42,43 @@ public class ContractService {
         return list;
     }
 
-    public void addContract(String name, int customerid, int staffid,int opprotunityid){
-        Map<String, String> map= new HashMap<String, String>();
-        map.put("contractid", opprotunityid+"");
-        map.put("customerid", customerid + "");
-        map.put("staffid", staffid + "");
-        map.put("contracttitle", name);
+    public void addContract(Map<String, String> map){
+//        Map<String, String> map= new HashMap<String, String>();
+//        map.put("contractid", opprotunityid+"");
+//        map.put("customerid", customerid + "");
+//        map.put("staffid", staffid + "");
+//        map.put("contracttitle", name);
 
 
         MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/contract_create_json"
+                , map,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                    }
+                }
+        );
+
+        RequestQueue mQueue = Volley.newRequestQueue(context);
+        mQueue.add(jsonObjectRequest);
+    }
+
+
+
+    public void modifyContract(Map<String, String> map){
+//        Map<String, String> map= new HashMap<String, String>();
+//        map.put("contractid", opprotunityid+"");
+//        map.put("customerid", customerid + "");
+//        map.put("staffid", staffid + "");
+//        map.put("contracttitle", name);
+
+
+        MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/contract_modify_json"
                 , map,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -108,7 +136,6 @@ public class ContractService {
                     public void onResponse(JSONObject jsonObject) {
                         try {
                             int count = jsonObject.getInt("recordcount");
-                            System.out.println("count" + count);
                             for(int i = 0;i < count;i++){
                                 Contract contract = new Contract();
                                 JSONObject info = jsonObject.getJSONObject(i+"");
@@ -135,7 +162,7 @@ public class ContractService {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        System.out.println("errorforvolley");
+
                     }
                 }
         );

@@ -47,7 +47,6 @@ public class ContactService {
 //        Map<String, String> map= new HashMap<String, String>();
 //        map.put("contactsname", name);
 //        map.put("contactid", contactid + "");
-        System.out.println(map.get("contactsname").toString()+"zzzz"+map.get("customerid"));
 
         MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/contact_create_json"
                 , map,
@@ -116,7 +115,6 @@ public class ContactService {
 
                                 list.add(contact);
                                 listener.success(true, list);
-                                System.out.println("listsize:"+list.size());
                             }
 
                         } catch (JSONException e) {
@@ -128,11 +126,33 @@ public class ContactService {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        System.out.println("errorforvolley");
                     }
                 }
         );
 
+
+        RequestQueue mQueue = Volley.newRequestQueue(context);
+        mQueue.add(jsonObjectRequest);
+
+    }
+
+
+    public void modifyContact(Map<String, String> map){
+
+        MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/contact_modify_json"
+                , map,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                    }
+                }
+        );
 
         RequestQueue mQueue = Volley.newRequestQueue(context);
         mQueue.add(jsonObjectRequest);

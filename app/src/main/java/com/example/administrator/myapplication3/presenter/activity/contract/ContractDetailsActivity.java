@@ -34,7 +34,6 @@ public class ContractDetailsActivity extends AppCompatActivity {
 
         int id = Integer.parseInt(getIntent().getStringExtra("id"));
 
-        System.out.println(id);
 
         Button button = (Button)findViewById(R.id.modify);
         button.setOnClickListener(new View.OnClickListener() {

@@ -77,7 +77,8 @@
             android:layout_marginTop="0dp"
             android:layout_marginBottom="0dp"
             android:layout_marginLeft="15dp"
-            android:text="0" />
+            android:text="1.0"
+            android:inputType="numberDecimal" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -123,7 +124,8 @@
             android:layout_marginTop="0dp"
             android:layout_marginBottom="0dp"
             android:layout_marginLeft="15dp"
-            android:text="cost" />
+            android:text="1.0"
+            android:inputType="numberDecimal" />
 
         <TextView
             android:layout_width="wrap_content"

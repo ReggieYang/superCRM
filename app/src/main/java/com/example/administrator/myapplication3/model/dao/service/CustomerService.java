@@ -96,7 +96,7 @@ public class CustomerService {
 
 
                             listener.success(true, list);
-                            System.out.println("size in service:" + list.size());
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -106,7 +106,7 @@ public class CustomerService {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        System.out.println("errorforvolley");
+
                     }
                 }
         );
@@ -143,11 +143,11 @@ public class CustomerService {
 
     }
 
-    public void addCustomer(String name, int staffid){
+    public void addCustomer(Map<String, String> map){
 
-        Map<String, String> map= new HashMap<String, String>();
-        map.put("customername", name);
-        map.put("staffid", staffid+"");
+//        Map<String, String> map= new HashMap<String, String>();
+//        map.put("customername", name);
+//        map.put("staffid", staffid+"");
 
 
         MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/customer_create_json"
@@ -202,7 +202,7 @@ public class CustomerService {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        System.out.print(volleyError);
+
                     }
                 }
         );

@@ -44,7 +44,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         map.put("unitcost", ((TextView) findViewById(R.id.cost)).getText().toString());
         map.put("classification", ((TextView) findViewById(R.id.classification)).getText().toString());
         map.put("introduction", ((TextView) findViewById(R.id.introduction)).getText().toString());
-        map.put("remark", ((TextView) findViewById(R.id.remark)).getText().toString());
+        map.put("productremarks", ((TextView) findViewById(R.id.remark)).getText().toString());
         map.put("productid", ((TextView) findViewById(R.id.id)).getText().toString());
     }
 
@@ -79,14 +79,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         int id = Integer.parseInt(getIntent().getStringExtra("id"));
 
-        System.out.println(id);
-
         Button button = (Button)findViewById(R.id.modify);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setMap();
-                System.out.println(map.get("productname").toString());
                 new ProductService(getApplicationContext()).modifyProduct(map);
                 Intent intent = new Intent(ProductDetailsActivity.this, ProductActivity.class);
                 startActivity(intent);

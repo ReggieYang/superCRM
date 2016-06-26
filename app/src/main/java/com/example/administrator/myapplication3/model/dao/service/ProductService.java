@@ -115,7 +115,7 @@ public class ProductService {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        System.out.print(volleyError);
+
                     }
                 }
         );
@@ -159,7 +159,7 @@ public class ProductService {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        System.out.println("errorforvolley");
+
                     }
                 }
         );

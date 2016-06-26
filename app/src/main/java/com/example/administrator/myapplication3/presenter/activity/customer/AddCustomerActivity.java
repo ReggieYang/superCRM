@@ -20,114 +20,141 @@ import com.example.administrator.myapplication3.model.dao.service.CustomerServic
 import com.example.administrator.myapplication3.model.entity.Customer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AddCustomerActivity extends AppCompatActivity {
 
-    private List<String> list = new ArrayList<String>();
+
+    private Map<String, String> map = new HashMap<String, String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_customer);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
+        setSpinner(1,1);
 
         Button button = (Button)findViewById(R.id.add);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CustomerService cs = new CustomerService(getApplicationContext());
-                String name = ((TextView) findViewById(R.id.name)).getText().toString();
-                int staffid = Integer.parseInt(((TextView) findViewById(R.id.staff)).getText().toString());
-                Toast.makeText(getApplicationContext(), staffid+"", Toast.LENGTH_SHORT).show();
-                cs.addCustomer(name, staffid);
+                setMap();
+                cs.addCustomer(map);
                 Intent intent = new Intent(AddCustomerActivity.this, CustomerActivity.class);
                 startActivity(intent);
             }
         });
 
 
+    }
 
-//        Spinner type = (Spinner)findViewById(R.id.type);
-//        list.add("重要客户");
-//        list.add("一般客户");
-//        list.add("低价值客户");
-//
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, list);
-//
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//
-//        type.setAdapter(adapter);
-//
-//        type.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){
-//            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-//                // TODO Auto-generated method stub
-//                arg0.setVisibility(View.VISIBLE);
-//            }
-//            public void onNothingSelected(AdapterView<?> arg0) {
-//                // TODO Auto-generated method stub
-// //               myTextView.setText("NONE");
-//                arg0.setVisibility(View.VISIBLE);
-//            }
-//        });
-//        /*下拉菜单弹出的内容选项触屏事件处理*/
-//        type.setOnTouchListener(new Spinner.OnTouchListener(){
-//            public boolean onTouch(View v, MotionEvent event) {
-//                // TODO Auto-generated method stub
-//                return false;
-//            }
-//        });
-//        /*下拉菜单弹出的内容选项焦点改变事件处理*/
-//        type.setOnFocusChangeListener(new Spinner.OnFocusChangeListener(){
-//            public void onFocusChange(View v, boolean hasFocus) {
-//                // TODO Auto-generated method stub
-//
-//            }
-//        });
-//
-//
-//        type = (Spinner)findViewById(R.id.status);
-//        list.clear();
-//        list.add("初访");
-//        list.add("意向");
-//        list.add("报价");
-//        list.add("成交");
-//        list.add("暂时搁置");
-//
-//        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, list);
-//
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//
-//        type.setAdapter(adapter);
-//
-//        type.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){
-//            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-//                // TODO Auto-generated method stub
-//                arg0.setVisibility(View.VISIBLE);
-//            }
-//            public void onNothingSelected(AdapterView<?> arg0) {
-//                // TODO Auto-generated method stub
-//                //               myTextView.setText("NONE");
-//                arg0.setVisibility(View.VISIBLE);
-//            }
-//        });
-//        /*下拉菜单弹出的内容选项触屏事件处理*/
-//        type.setOnTouchListener(new Spinner.OnTouchListener(){
-//            public boolean onTouch(View v, MotionEvent event) {
-//                // TODO Auto-generated method stub
-//                return false;
-//            }
-//        });
-//        /*下拉菜单弹出的内容选项焦点改变事件处理*/
-//        type.setOnFocusChangeListener(new Spinner.OnFocusChangeListener(){
-//            public void onFocusChange(View v, boolean hasFocus) {
-//                // TODO Auto-generated method stub
-//
-//            }
-//        });
-//
-//
+
+    private void setMap(){
+        map.put("customername", ((TextView) findViewById(R.id.name)).getText().toString());
+        map.put("profile", ((TextView) findViewById(R.id.profile)).getText().toString());
+        map.put("regionid", ((TextView) findViewById(R.id.region)).getText().toString());
+        map.put("parentcustomerid", ((TextView) findViewById(R.id.parentcustomer)).getText().toString());
+        map.put("customersource", ((TextView) findViewById(R.id.source)).getText().toString());
+        map.put("size", ((TextView) findViewById(R.id.company)).getText().toString());
+        map.put("telephone", ((TextView) findViewById(R.id.tel)).getText().toString());
+        map.put("email", ((TextView) findViewById(R.id.email)).getText().toString());
+        map.put("website", ((TextView) findViewById(R.id.website)).getText().toString());
+        map.put("address", ((TextView) findViewById(R.id.address)).getText().toString());
+        map.put("zipcode", ((TextView) findViewById(R.id.zipcode)).getText().toString());
+        map.put("customerremarks", ((TextView) findViewById(R.id.remark)).getText().toString());
+        map.put("staffid", ((TextView) findViewById(R.id.staff)).getText().toString());
+        map.put("customertype", ((Spinner) findViewById(R.id.type)).getSelectedItemPosition()+1+"");
+        map.put("customerstatus", ((Spinner) findViewById(R.id.status)).getSelectedItemPosition()+1+"");
+    }
+
+    private void setSpinner(int ctype, int cstatus){
+
+        ArrayList<String> list = new ArrayList<String>();
+        Spinner type = (Spinner)findViewById(R.id.type);
+        list.add("重要客户");
+        list.add("一般客户");
+        list.add("低价值客户");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, list);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        type.setAdapter(adapter);
+
+        type.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                // TODO Auto-generated method stub
+                arg0.setVisibility(View.VISIBLE);
+            }
+
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+                //               myTextView.setText("NONE");
+                arg0.setVisibility(View.VISIBLE);
+            }
+        });
+        /*下拉菜单弹出的内容选项触屏事件处理*/
+        type.setOnTouchListener(new Spinner.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                // TODO Auto-generated method stub
+                return false;
+            }
+        });
+        /*下拉菜单弹出的内容选项焦点改变事件处理*/
+        type.setOnFocusChangeListener(new Spinner.OnFocusChangeListener(){
+            public void onFocusChange(View v, boolean hasFocus) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+        type.setSelection(ctype-1);
+
+        Spinner status = (Spinner)findViewById(R.id.status);
+        ArrayList<String> list2 = new ArrayList<String>();
+        list2.add("初访");
+        list2.add("意向");
+        list2.add("报价");
+        list2.add("成交");
+        list2.add("暂时搁置");
+
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, list2);
+
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        status.setAdapter(adapter2);
+
+        status.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                // TODO Auto-generated method stub
+                arg0.setVisibility(View.VISIBLE);
+            }
+
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+                //               myTextView.setText("NONE");
+                arg0.setVisibility(View.VISIBLE);
+            }
+        });
+        /*下拉菜单弹出的内容选项触屏事件处理*/
+        status.setOnTouchListener(new Spinner.OnTouchListener(){
+            public boolean onTouch(View v, MotionEvent event) {
+                // TODO Auto-generated method stub
+                return false;
+            }
+        });
+        /*下拉菜单弹出的内容选项焦点改变事件处理*/
+        status.setOnFocusChangeListener(new Spinner.OnFocusChangeListener(){
+            public void onFocusChange(View v, boolean hasFocus) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+        status.setSelection(cstatus-1);
     }
 
 }

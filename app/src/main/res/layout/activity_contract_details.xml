@@ -74,8 +74,7 @@
             android:textSize="16dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="0dp"
-            android:layout_marginLeft="20dp"
-            android:text="2" />
+            android:layout_marginLeft="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -138,7 +137,8 @@
             android:textSize="16dp"
             android:layout_marginTop="0dp"
             android:layout_marginBottom="0dp"
-            android:layout_marginLeft="15dp" />
+            android:layout_marginLeft="15dp"
+            android:inputType="numberDecimal" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -226,7 +226,8 @@
             android:textSize="16dp"
             android:layout_marginTop="0dp"
             android:layout_marginBottom="0dp"
-            android:layout_marginLeft="15dp" />
+            android:layout_marginLeft="15dp"
+            android:inputType="number" />
 
         <TextView
             android:layout_width="wrap_content"

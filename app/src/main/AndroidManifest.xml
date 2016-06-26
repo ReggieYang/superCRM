@@ -26,7 +26,7 @@
         <activity
             android:name=".presenter.activity.customer.AddCustomerActivity"
             android:label="新增客户"
-            android:theme="@style/AppTheme.NoActionBar" />
+            />
         <activity
             android:name=".presenter.activity.customer.CustomerDetailsActivity"
             android:label="客户详情" />
@@ -48,8 +48,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".presenter.activity.contract.AddContractActivity"
-            android:label="新增合同"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="新增合同" />
         <activity
             android:name=".presenter.activity.contract.ContractDetailsActivity"
             android:label="合同详情" />

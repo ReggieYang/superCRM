@@ -77,7 +77,8 @@
             android:layout_marginTop="0dp"
             android:layout_marginBottom="0dp"
             android:layout_marginLeft="15dp"
-            android:text="18" />
+            android:text="18"
+            android:inputType="number" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -123,7 +124,8 @@
             android:layout_marginTop="0dp"
             android:layout_marginBottom="0dp"
             android:layout_marginLeft="15dp"
-            android:text="mobile" />
+            android:text="13030003000"
+            android:inputType="phone" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -146,7 +148,8 @@
             android:layout_marginTop="0dp"
             android:layout_marginBottom="0dp"
             android:layout_marginLeft="15dp"
-            android:text="tel" />
+            android:text="80000000"
+            android:inputType="phone" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -169,7 +172,8 @@
             android:layout_marginTop="0dp"
             android:layout_marginBottom="0dp"
             android:layout_marginLeft="15dp"
-            android:text="email" />
+            android:text="123@qq.com"
+            android:inputType="textEmailAddress" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -215,7 +219,8 @@
             android:layout_marginTop="0dp"
             android:layout_marginBottom="0dp"
             android:layout_marginLeft="15dp"
-            android:text="zipcode" />
+            android:text="210045"
+            android:inputType="number" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -238,7 +243,8 @@
             android:layout_marginTop="0dp"
             android:layout_marginBottom="0dp"
             android:layout_marginLeft="15dp"
-            android:text="qq" />
+            android:text="12345678"
+            android:inputType="number" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -330,7 +336,8 @@
             android:layout_marginTop="0dp"
             android:layout_marginBottom="0dp"
             android:layout_marginLeft="15dp"
-            android:text="0" />
+            android:text="0"
+            android:inputType="number" />
 
         <TextView
             android:layout_width="wrap_content"
