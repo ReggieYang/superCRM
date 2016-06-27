@@ -33,6 +33,7 @@ import com.example.administrator.myapplication3.model.dao.net.MyJsonRequest;
 import com.example.administrator.myapplication3.model.dao.service.OpportunityService;
 import com.example.administrator.myapplication3.model.dao.service.IUpdateListener;
 import com.example.administrator.myapplication3.model.entity.Opportunity;
+import com.example.administrator.myapplication3.presenter.activity.contract.ContractListActivity;
 import com.example.administrator.myapplication3.presenter.activity.followup.FollowupActivity;
 
 
@@ -82,9 +83,12 @@ public class OpportunityDetailsActivity extends AppCompatActivity {
                 intent.putExtra("sourcetype", "2");
                 startActivity(intent);
                 return true;
-            case R.id.product:
-
+            case R.id.contract:
+                intent = new Intent(OpportunityDetailsActivity.this, ContractListActivity.class);
+                intent.putExtra("opportunityid", ((TextView) findViewById(R.id.id)).getText().toString());
+                startActivity(intent);
                 return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

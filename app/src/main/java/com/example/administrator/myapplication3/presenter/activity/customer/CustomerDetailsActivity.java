@@ -22,7 +22,10 @@ import com.example.administrator.myapplication3.model.dao.service.IUpdateListene
 import com.example.administrator.myapplication3.model.entity.Customer;
 import com.example.administrator.myapplication3.model.entity.Followup;
 import com.example.administrator.myapplication3.presenter.activity.contact.ContactDetailsActivity;
+import com.example.administrator.myapplication3.presenter.activity.contact.ContactListActivity;
+import com.example.administrator.myapplication3.presenter.activity.contract.ContractListActivity;
 import com.example.administrator.myapplication3.presenter.activity.followup.FollowupActivity;
+import com.example.administrator.myapplication3.presenter.activity.opportunity.OpportunityListActivity;
 import com.example.administrator.myapplication3.presenter.adapter.FollowupAdapter;
 
 import java.util.ArrayList;
@@ -115,9 +118,22 @@ public class CustomerDetailsActivity extends AppCompatActivity {
                 intent.putExtra("sourcetype", "1");
                 startActivity(intent);
                 return true;
-            case R.id.product:
-
+            case R.id.contact:
+                intent = new Intent(CustomerDetailsActivity.this, ContactListActivity.class);
+                intent.putExtra("customerid", ((TextView) findViewById(R.id.id)).getText().toString());
+                startActivity(intent);
                 return true;
+            case R.id.opportunity:
+                intent = new Intent(CustomerDetailsActivity.this, OpportunityListActivity.class);
+                intent.putExtra("customerid", ((TextView) findViewById(R.id.id)).getText().toString());
+                startActivity(intent);
+                return true;
+            case R.id.contract:
+                intent = new Intent(CustomerDetailsActivity.this, ContractListActivity.class);
+                intent.putExtra("customerid", ((TextView) findViewById(R.id.id)).getText().toString());
+                startActivity(intent);
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

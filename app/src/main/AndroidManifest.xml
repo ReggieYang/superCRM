@@ -82,8 +82,21 @@
             android:label="报表展现" />
         <activity
             android:name=".presenter.activity.followup.FollowupActivity"
-            android:label="跟进记录"></activity>
-        <activity android:name=".presenter.activity.followup.AddFollowupActivity"></activity>
+            android:label="跟进记录" />
+        <activity android:name=".presenter.activity.followup.AddFollowupActivity"
+            android:label="新增跟进"
+            />
+        <activity android:name=".presenter.activity.contract.ContractListActivity"
+            android:label="相关合同"
+            />
+        <activity android:name=".presenter.activity.opportunity.OpportunityListActivity"
+            android:label="相关商机"
+            />
+
+        <activity android:name=".presenter.activity.contact.ContactListActivity"
+            android:label="相关联系人"
+            />
+
     </application>
 
 </manifest>

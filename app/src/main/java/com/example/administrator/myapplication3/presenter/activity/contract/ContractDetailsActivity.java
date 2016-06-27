@@ -76,9 +76,7 @@ public class ContractDetailsActivity extends AppCompatActivity {
                 intent.putExtra("sourcetype", "3");
                 startActivity(intent);
                 return true;
-            case R.id.product:
 
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
