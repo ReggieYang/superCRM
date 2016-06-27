@@ -7,6 +7,9 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,6 +25,7 @@ import com.example.administrator.myapplication3.R;
 import com.example.administrator.myapplication3.model.dao.service.ContractService;
 import com.example.administrator.myapplication3.model.dao.service.IUpdateListener;
 import com.example.administrator.myapplication3.model.entity.Contract;
+import com.example.administrator.myapplication3.presenter.activity.followup.FollowupActivity;
 
 
 import java.util.ArrayList;
@@ -60,6 +64,33 @@ public class ContractDetailsActivity extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener mDateSetListener3;
     private TimePickerDialog.OnTimeSetListener mTimeSetListener3;
     public boolean isCreatePickerDialog=true;
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.followup:
+                Intent intent = new Intent(ContractDetailsActivity.this, FollowupActivity.class);
+                intent.putExtra("sourceid", ((TextView) findViewById(R.id.id)).getText().toString());
+                intent.putExtra("sourcetype", "3");
+                startActivity(intent);
+                return true;
+            case R.id.product:
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_contract, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -3,32 +3,31 @@ package com.example.administrator.myapplication3.presenter.activity.customer;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.administrator.myapplication3.R;
 import com.example.administrator.myapplication3.model.dao.service.CustomerService;
+import com.example.administrator.myapplication3.model.dao.service.FollowupService;
 import com.example.administrator.myapplication3.model.dao.service.IUpdateListener;
 import com.example.administrator.myapplication3.model.entity.Customer;
+import com.example.administrator.myapplication3.model.entity.Followup;
+import com.example.administrator.myapplication3.presenter.activity.contact.ContactDetailsActivity;
+import com.example.administrator.myapplication3.presenter.activity.followup.FollowupActivity;
+import com.example.administrator.myapplication3.presenter.adapter.FollowupAdapter;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CustomerDetailsActivity extends AppCompatActivity {
@@ -77,6 +76,24 @@ public class CustomerDetailsActivity extends AppCompatActivity {
                 (((TextView) findViewById(R.id.id))).setText(data.getCustomerid()+"");
 
                 setSpinner(data.getCustomertype(), data.getCustomerstatus());
+
+                FollowupService cs = new FollowupService(getApplicationContext());
+
+
+
+
+                cs.getFollwup(327, 1, new IUpdateListener<List<Followup>>() {
+                    @Override
+                    public void success(boolean isSuccess, List<Followup> data) {
+
+                    }
+
+                    @Override
+                    public void fail(VolleyError error) {
+
+                    }
+                });
+
             }
 
             @Override
@@ -85,6 +102,34 @@ public class CustomerDetailsActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.followup:
+                Intent intent = new Intent(CustomerDetailsActivity.this, FollowupActivity.class);
+                intent.putExtra("sourceid", ((TextView) findViewById(R.id.id)).getText().toString());
+                intent.putExtra("sourcetype", "1");
+                startActivity(intent);
+                return true;
+            case R.id.product:
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_customer, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     private void setMap(){

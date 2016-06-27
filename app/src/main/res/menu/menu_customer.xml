@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item android:id="@+id/product"
+        android:title="产品"
+ />
+
+    <item android:id="@+id/followup"
+        android:title="跟进记录"
+ />
+
+    <item android:id="@+id/opportunity"
+        android:title="商机"
+        />
+
+    <item android:id="@+id/contract"
+        android:title="合同"
+        />
+</menu>

@@ -7,6 +7,9 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -30,6 +33,7 @@ import com.example.administrator.myapplication3.model.dao.net.MyJsonRequest;
 import com.example.administrator.myapplication3.model.dao.service.OpportunityService;
 import com.example.administrator.myapplication3.model.dao.service.IUpdateListener;
 import com.example.administrator.myapplication3.model.entity.Opportunity;
+import com.example.administrator.myapplication3.presenter.activity.followup.FollowupActivity;
 
 
 import org.json.JSONException;
@@ -66,6 +70,33 @@ public class OpportunityDetailsActivity extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener acdateListener;
     private TimePickerDialog.OnTimeSetListener actimeListener;
     public boolean isCreatePickerDialog=true;
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.followup:
+                Intent intent = new Intent(OpportunityDetailsActivity.this, FollowupActivity.class);
+                intent.putExtra("sourceid", ((TextView) findViewById(R.id.id)).getText().toString());
+                intent.putExtra("sourcetype", "2");
+                startActivity(intent);
+                return true;
+            case R.id.product:
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_opportunity, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
