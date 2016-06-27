@@ -7,7 +7,8 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+
+        android:icon="@drawable/crmicon"
         android:label="supercrm"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
