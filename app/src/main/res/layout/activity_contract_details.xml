@@ -50,9 +50,9 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/id"
             android:textSize="16dp"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="0dp"
-            android:layout_marginLeft="15dp" />
+            android:layout_marginLeft="20dp" />
 
         <TextView
             android:layout_width="wrap_content"

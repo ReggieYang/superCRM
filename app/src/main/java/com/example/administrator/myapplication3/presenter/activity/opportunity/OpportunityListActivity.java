@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.android.volley.VolleyError;
@@ -12,6 +13,7 @@ import com.example.administrator.myapplication3.R;
 import com.example.administrator.myapplication3.model.dao.service.OpportunityService;
 import com.example.administrator.myapplication3.model.dao.service.IUpdateListener;
 import com.example.administrator.myapplication3.model.entity.Opportunity;
+import com.example.administrator.myapplication3.presenter.activity.contact.ContactDetailsActivity;
 import com.example.administrator.myapplication3.presenter.adapter.OpportunityAdapter;
 
 import java.util.ArrayList;
@@ -85,6 +87,15 @@ public class OpportunityListActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(OpportunityListActivity.this, AddOpportunityActivity.class);
                 intent.putExtra("customerid", getIntent().getStringExtra("customerid"));
+                startActivity(intent);
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(OpportunityListActivity.this, OpportunityDetailsActivity.class);
+                intent.putExtra("id", list.get(position).getOpportunityid() + "");
                 startActivity(intent);
             }
         });

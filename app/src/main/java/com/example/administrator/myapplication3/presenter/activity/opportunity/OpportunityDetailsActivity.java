@@ -108,8 +108,7 @@ public class OpportunityDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_opportunity_details);
 
         int id = Integer.parseInt(getIntent().getStringExtra("id"));
-
-
+        System.out.println("getid:"+id);
 
         Button button = (Button)findViewById(R.id.modify);
         button.setOnClickListener(new View.OnClickListener() {

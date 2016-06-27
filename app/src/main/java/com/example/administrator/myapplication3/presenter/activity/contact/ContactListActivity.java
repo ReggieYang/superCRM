@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.android.volley.VolleyError;
@@ -12,6 +13,8 @@ import com.example.administrator.myapplication3.R;
 import com.example.administrator.myapplication3.model.dao.service.ContactService;
 import com.example.administrator.myapplication3.model.dao.service.IUpdateListener;
 import com.example.administrator.myapplication3.model.entity.Contact;
+import com.example.administrator.myapplication3.presenter.activity.contract.ContractListActivity;
+import com.example.administrator.myapplication3.presenter.activity.opportunity.OpportunityDetailsActivity;
 import com.example.administrator.myapplication3.presenter.adapter.ContactAdapter;
 
 import java.util.ArrayList;
@@ -87,6 +90,15 @@ public class ContactListActivity extends AppCompatActivity {
                 Intent intent = new Intent(ContactListActivity.this, AddContactActivity.class);
                 intent.putExtra("sourceid", getIntent().getStringExtra("sourceid"));
                 intent.putExtra("sourcetype", getIntent().getStringExtra("sourcetype"));
+                startActivity(intent);
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(ContactListActivity.this, ContactDetailsActivity.class);
+                intent.putExtra("id", list.get(position).getContactsid() + "");
                 startActivity(intent);
             }
         });

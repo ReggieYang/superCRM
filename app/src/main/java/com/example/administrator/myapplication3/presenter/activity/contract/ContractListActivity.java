@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -13,6 +14,7 @@ import com.example.administrator.myapplication3.R;
 import com.example.administrator.myapplication3.model.dao.service.IUpdateListener;
 import com.example.administrator.myapplication3.model.dao.service.ContractService;
 import com.example.administrator.myapplication3.model.entity.Contract;
+import com.example.administrator.myapplication3.presenter.activity.opportunity.OpportunityDetailsActivity;
 import com.example.administrator.myapplication3.presenter.adapter.ContractAdapter;
 
 import java.util.ArrayList;
@@ -90,6 +92,15 @@ public class ContractListActivity extends AppCompatActivity {
                 Intent intent = new Intent(ContractListActivity.this, AddContractActivity.class);
                 intent.putExtra("customerid", getIntent().getStringExtra("customerid"));
                 intent.putExtra("opportunityid", getIntent().getStringExtra("opportunityid"));
+                startActivity(intent);
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(ContractListActivity.this, ContractDetailsActivity.class);
+                intent.putExtra("id", list.get(position).getContractid() + "");
                 startActivity(intent);
             }
         });
