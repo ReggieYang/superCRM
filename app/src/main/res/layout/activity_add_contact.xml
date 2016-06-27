@@ -45,16 +45,17 @@
             android:textColor="#1590dd"
             android:textSize="16dp" />
 
-        <TextView
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/customer"
             android:textSize="16dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="0dp"
             android:layout_marginBottom="0dp"
-            android:layout_marginLeft="20dp"
-            android:text="100" />
+            android:layout_marginLeft="15dp"
+            android:text="483"
+            android:inputType="number" />
 
         <TextView
             android:layout_width="wrap_content"

@@ -112,7 +112,7 @@ public class ContactService {
                                 JSONObject info = jsonObject.getJSONObject(i+"");
                                 contact.setContactsid(info.getInt("contactsid"));
                                 contact.setContactsname(info.getString("contactsname"));
-
+                                contact.setCustomerid(info.getInt("customerid"));
                                 list.add(contact);
                                 listener.success(true, list);
                             }
@@ -137,6 +137,47 @@ public class ContactService {
     }
 
 
+    public void getCustomerContactList(Map<String, String> map, final IUpdateListener<List<Contact>> listener){
+        map.put("currentpage", "0");
+        final ArrayList<Contact> list = new ArrayList<Contact>();
+
+        MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/common_contacts_json"
+                , map,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                        try {
+                            int count = jsonObject.getInt("recordcount");
+
+                            for(int i = 0;i < count;i++){
+                                Contact contact = new Contact();
+                                JSONObject info = jsonObject.getJSONObject(i+"");
+                                contact.setContactsid(info.getInt("contactsid"));
+                                contact.setContactsname(info.getString("contactsname"));
+                                contact.setCustomerid(info.getInt("customerid"));
+                                list.add(contact);
+                                listener.success(true, list);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                    }
+                }
+        );
+
+
+        RequestQueue mQueue = Volley.newRequestQueue(context);
+        mQueue.add(jsonObjectRequest);
+
+    }
+
 
     public void getMyContactList(final IUpdateListener<List<Contact>> listener){
         Map<String, String> map= new HashMap<String, String>();
@@ -157,7 +198,7 @@ public class ContactService {
                                 JSONObject info = jsonObject.getJSONObject(i+"");
                                 contact.setContactsid(info.getInt("contactsid"));
                                 contact.setContactsname(info.getString("contactsname"));
-
+                                contact.setCustomerid(info.getInt("customerid"));
                                 list.add(contact);
                                 listener.success(true, list);
                             }

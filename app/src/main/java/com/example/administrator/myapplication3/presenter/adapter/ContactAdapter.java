@@ -41,34 +41,34 @@ public class ContactAdapter extends ArrayAdapter<Contact> {
         }
 
         holderView.name.setText(contact.getContactsname());
-        holderView.status.setText(parseStatus(contact.getCustomerid()));
+        holderView.status.setText(contact.getCustomerid()+"");
 
         return view;
     }
 
 
-    private String parseStatus(int st){
-        switch (st){
-            case 1:
-                return "初访";
-
-            case 2:
-                return "意向";
-
-            case 3:
-                return "报价";
-
-            case 4:
-                return "成交";
-
-            case 5:
-                return "暂时搁置";
-
-            default:
-                return "未知";
-
-        }
-    }
+//    private String parseStatus(int st){
+//        switch (st){
+//            case 1:
+//                return "初访";
+//
+//            case 2:
+//                return "意向";
+//
+//            case 3:
+//                return "报价";
+//
+//            case 4:
+//                return "成交";
+//
+//            case 5:
+//                return "暂时搁置";
+//
+//            default:
+//                return "未知";
+//
+//        }
+//    }
 
 
     class HolderView{

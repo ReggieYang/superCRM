@@ -67,6 +67,13 @@ public class AddContractActivity extends AppCompatActivity {
 
         init();
         setSpinner(1);
+        if(getIntent().getStringExtra("customerid")!=null){
+            ((TextView)findViewById(R.id.customer)).setText(getIntent().getStringExtra("customerid"));
+        }
+
+        if(getIntent().getStringExtra("opportunityid")!=null){
+            ((TextView)findViewById(R.id.opportunity)).setText(getIntent().getStringExtra("opportunityid"));
+        }
 
 
         Button button = (Button)findViewById(R.id.add);
