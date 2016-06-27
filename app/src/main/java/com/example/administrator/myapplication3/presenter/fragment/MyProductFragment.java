@@ -27,6 +27,10 @@ public class MyProductFragment extends Fragment {
 
     private List<Product> list = new ArrayList<Product>();
 
+
+    ProductAdapter adapter;
+    View rootView;
+
     public MyProductFragment() {
     }
 
@@ -42,25 +46,11 @@ public class MyProductFragment extends Fragment {
         return fragment;
     }
 
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_allproduct, container, false);
-
-        ListView listView = (ListView) rootView.findViewById(R.id.listView);
+    public void onResume(){
+        super.onResume();
         ProductService cs = new ProductService(getContext());
-
-        final ProductAdapter adapter = new ProductAdapter(getContext(),list);
-        listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
-                intent.putExtra("id", list.get(position).getProductid() + "");
-                startActivity(intent);
-            }
-        });
 
         cs.getProductList(new IUpdateListener<List<Product>>() {
             @Override
@@ -75,6 +65,55 @@ public class MyProductFragment extends Fragment {
 
             }
         });
+    }
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        if (null != rootView) {
+            ViewGroup parent = (ViewGroup) rootView.getParent();
+            if (null != parent) {
+                parent.removeView(rootView);
+            }
+        } else {
+            System.out.println("yangkaimao");
+            rootView = inflater.inflate(R.layout.fragment_myproduct, container, false);
+
+            ListView listView = (ListView) rootView.findViewById(R.id.listView);
+
+            ProductService cs = new ProductService(getContext());
+
+            adapter = new ProductAdapter(getContext(),list);
+            listView.setAdapter(adapter);
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
+                    intent.putExtra("id", list.get(position).getProductid() + "");
+                    startActivity(intent);
+                }
+            });
+
+
+            cs.getProductList(new IUpdateListener<List<Product>>() {
+                @Override
+                public void success(boolean isSuccess, List<Product> data) {
+                    list.clear();
+                    list.addAll(data);
+                    adapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void fail(VolleyError error) {
+
+                }
+            });
+        }
+
+
+
         return rootView;
     }
 }

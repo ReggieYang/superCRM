@@ -45,8 +45,9 @@ public class AddCustomerActivity extends AppCompatActivity {
                 CustomerService cs = new CustomerService(getApplicationContext());
                 setMap();
                 cs.addCustomer(map);
-                Intent intent = new Intent(AddCustomerActivity.this, CustomerActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(AddCustomerActivity.this, CustomerActivity.class);
+//                startActivity(intent);
+                finish();
             }
         });
 

@@ -30,8 +30,9 @@ public class AddContactActivity extends AppCompatActivity {
                 ContactService cs = new ContactService(getApplicationContext());
                 setMap();
                 cs.addContact(map);
-                Intent intent = new Intent(AddContactActivity.this, ContactActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(AddContactActivity.this, ContactActivity.class);
+//                startActivity(intent);
+                finish();
             }
         });
     }

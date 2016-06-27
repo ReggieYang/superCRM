@@ -31,11 +31,6 @@ public class AllProductFragment extends Fragment {
     private List<Product> list = new ArrayList<>();
 
     ProductAdapter adapter;
-
-
-    LayoutInflater inflater2;
-    ViewGroup container2;
-    Bundle savedInstanceState2;
     View rootView;
 
     public AllProductFragment() {
@@ -65,7 +60,6 @@ public class AllProductFragment extends Fragment {
                 list.clear();
                 list.addAll(data);
                 adapter.notifyDataSetChanged();
-                System.out.println("pname:"+list.get(3).getProductname());
             }
 
             @Override

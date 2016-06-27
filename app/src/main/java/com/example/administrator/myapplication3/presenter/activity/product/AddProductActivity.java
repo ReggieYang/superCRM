@@ -31,8 +31,9 @@ public class AddProductActivity extends AppCompatActivity {
                 ProductService ps = new ProductService(getApplicationContext());
                 setMap();
                 ps.addProduct(map);
-                Intent intent = new Intent(AddProductActivity.this, ProductActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(AddProductActivity.this, ProductActivity.class);
+//                startActivity(intent);
+                finish();
             }
         });
     }

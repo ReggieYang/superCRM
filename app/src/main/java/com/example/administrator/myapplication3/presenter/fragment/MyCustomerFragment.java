@@ -26,7 +26,8 @@ public class MyCustomerFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     private List<Customer> list = new ArrayList<>();
-
+    View rootView;
+    CustomerAdapter adapter;
     public MyCustomerFragment() {
     }
 
@@ -43,25 +44,9 @@ public class MyCustomerFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_allcustomer, container, false);
-
-        final ListView listView = (ListView) rootView.findViewById(R.id.listView);
-
+    public void onResume(){
+        super.onResume();
         CustomerService cs = new CustomerService(getContext());
-
-        final CustomerAdapter adapter = new CustomerAdapter(getContext(), list);
-        listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), CustomerDetailsActivity.class);
-                intent.putExtra("id", list.get(position).getCustomerid() + "");
-                startActivity(intent);
-            }
-        });
 
         cs.getMyCustomerList(new IUpdateListener<List<Customer>>() {
             @Override
@@ -76,6 +61,49 @@ public class MyCustomerFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        if (null != rootView) {
+            ViewGroup parent = (ViewGroup) rootView.getParent();
+            if (null != parent) {
+                parent.removeView(rootView);
+            }
+        } else {
+            rootView = inflater.inflate(R.layout.fragment_mycustomer, container, false);
+
+            ListView listView = (ListView) rootView.findViewById(R.id.listView);
+            CustomerService cs = new CustomerService(getContext());
+
+            adapter = new CustomerAdapter(getContext(),list);
+            listView.setAdapter(adapter);
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent(getActivity(), CustomerDetailsActivity.class);
+                    intent.putExtra("id", list.get(position).getCustomerid() + "");
+                    startActivity(intent);
+                }
+            });
+
+            cs.getMyCustomerList(new IUpdateListener<List<Customer>>() {
+                @Override
+                public void success(boolean isSuccess, List<Customer> data) {
+                    list.clear();
+                    list.addAll(data);
+                    adapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void fail(VolleyError error) {
+
+                }
+            });
+        }
 
         return rootView;
     }

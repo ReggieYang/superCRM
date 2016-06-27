@@ -31,6 +31,9 @@ public class MyContractFragment extends Fragment {
 
     private List<Contract> list = new ArrayList<>();
 
+    View rootView;
+    ContractAdapter adapter;
+
     public MyContractFragment() {
     }
 
@@ -47,27 +50,11 @@ public class MyContractFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_mycontract, container, false);
-
-        ListView listView = (ListView) rootView.findViewById(R.id.listView);
-
+    public void onResume(){
+        super.onResume();
         ContractService cs = new ContractService(getContext());
 
-        final ContractAdapter adapter = new ContractAdapter(getContext(),list);
-        listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), ContractDetailsActivity.class);
-                intent.putExtra("id", list.get(position).getContractid() + "");
-                startActivity(intent);
-            }
-        });
-
-        cs.getContractList(new IUpdateListener<List<Contract>>() {
+        cs.getMyContractList(new IUpdateListener<List<Contract>>() {
             @Override
             public void success(boolean isSuccess, List<Contract> data) {
                 list.clear();
@@ -80,6 +67,50 @@ public class MyContractFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        if (null != rootView) {
+            ViewGroup parent = (ViewGroup) rootView.getParent();
+            if (null != parent) {
+                parent.removeView(rootView);
+            }
+        } else {
+            rootView = inflater.inflate(R.layout.fragment_mycontract, container, false);
+
+            ListView listView = (ListView) rootView.findViewById(R.id.listView);
+            ContractService cs = new ContractService(getContext());
+
+            adapter = new ContractAdapter(getContext(),list);
+            listView.setAdapter(adapter);
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent(getActivity(), ContractDetailsActivity.class);
+                    intent.putExtra("id", list.get(position).getContractid() + "");
+                    startActivity(intent);
+                }
+            });
+
+            cs.getMyContractList(new IUpdateListener<List<Contract>>() {
+                @Override
+                public void success(boolean isSuccess, List<Contract> data) {
+                    list.clear();
+                    list.addAll(data);
+                    adapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void fail(VolleyError error) {
+
+                }
+            });
+        }
+
         return rootView;
     }
 }

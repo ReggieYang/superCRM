@@ -26,6 +26,9 @@ public class MyContactFragment extends Fragment {
 
     private List<Contact> list = new ArrayList<>();
 
+    ContactAdapter adapter;
+    View rootView;
+
     public MyContactFragment() {
     }
 
@@ -42,27 +45,11 @@ public class MyContactFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_mycontact, container, false);
-
-        ListView listView = (ListView) rootView.findViewById(R.id.listView);
-
+    public void onResume(){
+        super.onResume();
         ContactService cs = new ContactService(getContext());
 
-        final ContactAdapter adapter = new ContactAdapter(getContext(),list);
-        listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), ContactDetailsActivity.class);
-                intent.putExtra("id", list.get(position).getContactsid() + "");
-                startActivity(intent);
-            }
-        });
-
-        cs.getContactList(new IUpdateListener<List<Contact>>() {
+        cs.getMyContactList(new IUpdateListener<List<Contact>>() {
             @Override
             public void success(boolean isSuccess, List<Contact> data) {
                 list.clear();
@@ -75,6 +62,87 @@ public class MyContactFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        if (null != rootView) {
+            ViewGroup parent = (ViewGroup) rootView.getParent();
+            if (null != parent) {
+                parent.removeView(rootView);
+            }
+        } else {
+            rootView = inflater.inflate(R.layout.fragment_mycontact, container, false);
+
+            ListView listView = (ListView) rootView.findViewById(R.id.listView);
+            ContactService cs = new ContactService(getContext());
+
+            adapter = new ContactAdapter(getContext(),list);
+            listView.setAdapter(adapter);
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent(getActivity(), ContactDetailsActivity.class);
+                    intent.putExtra("id", list.get(position).getContactsid() + "");
+                    startActivity(intent);
+                }
+            });
+
+            cs.getMyContactList(new IUpdateListener<List<Contact>>() {
+                @Override
+                public void success(boolean isSuccess, List<Contact> data) {
+                    list.clear();
+                    list.addAll(data);
+                    adapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void fail(VolleyError error) {
+
+                }
+            });
+        }
+
         return rootView;
     }
+
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//                             Bundle savedInstanceState) {
+//        View rootView = inflater.inflate(R.layout.fragment_mycontact, container, false);
+//
+//        ListView listView = (ListView) rootView.findViewById(R.id.listView);
+//
+//        ContactService cs = new ContactService(getContext());
+//
+//        final ContactAdapter adapter = new ContactAdapter(getContext(),list);
+//        listView.setAdapter(adapter);
+//
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Intent intent = new Intent(getActivity(), ContactDetailsActivity.class);
+//                intent.putExtra("id", list.get(position).getContactsid() + "");
+//                startActivity(intent);
+//            }
+//        });
+//
+//        cs.getContactList(new IUpdateListener<List<Contact>>() {
+//            @Override
+//            public void success(boolean isSuccess, List<Contact> data) {
+//                list.clear();
+//                list.addAll(data);
+//                adapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void fail(VolleyError error) {
+//
+//            }
+//        });
+//        return rootView;
+//    }
 }

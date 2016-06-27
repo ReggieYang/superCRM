@@ -73,8 +73,9 @@ public class AddOpportunityActivity extends AppCompatActivity {
                 OpportunityService os = new OpportunityService(getApplicationContext());
                 setMap();
                 os.addOpportunity(map);
-                Intent intent = new Intent(AddOpportunityActivity.this, OpportunityActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(AddOpportunityActivity.this, OpportunityActivity.class);
+//                startActivity(intent);
+                finish();
             }
         });
         

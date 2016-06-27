@@ -27,6 +27,8 @@ public class MyOpportunityFragment extends Fragment {
 
     private List<Opportunity> list = new ArrayList<>();
 
+    View rootView;
+    OpportunityAdapter adapter;
     public MyOpportunityFragment() {
     }
 
@@ -43,27 +45,11 @@ public class MyOpportunityFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_myopportunity, container, false);
+    public void onResume(){
+        super.onResume();
+        OpportunityService cs = new OpportunityService(getContext());
 
-        final ListView listView = (ListView) rootView.findViewById(R.id.listView);
-
-        OpportunityService os = new OpportunityService(getContext());
-
-        final OpportunityAdapter adapter = new OpportunityAdapter(getContext(),list);
-        listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), OpportunityDetailsActivity.class);
-                intent.putExtra("id", list.get(position).getOpportunityid() + "");
-                startActivity(intent);
-            }
-        });
-
-        os.getOpportunityList(new IUpdateListener<List<Opportunity>>() {
+        cs.getMyOpportunityList(new IUpdateListener<List<Opportunity>>() {
             @Override
             public void success(boolean isSuccess, List<Opportunity> data) {
                 list.clear();
@@ -76,6 +62,49 @@ public class MyOpportunityFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        if (null != rootView) {
+            ViewGroup parent = (ViewGroup) rootView.getParent();
+            if (null != parent) {
+                parent.removeView(rootView);
+            }
+        } else {
+            rootView = inflater.inflate(R.layout.fragment_myopportunity, container, false);
+
+            ListView listView = (ListView) rootView.findViewById(R.id.listView);
+            OpportunityService cs = new OpportunityService(getContext());
+
+            adapter = new OpportunityAdapter(getContext(),list);
+            listView.setAdapter(adapter);
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent(getActivity(), OpportunityDetailsActivity.class);
+                    intent.putExtra("id", list.get(position).getOpportunityid() + "");
+                    startActivity(intent);
+                }
+            });
+
+            cs.getMyOpportunityList(new IUpdateListener<List<Opportunity>>() {
+                @Override
+                public void success(boolean isSuccess, List<Opportunity> data) {
+                    list.clear();
+                    list.addAll(data);
+                    adapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void fail(VolleyError error) {
+
+                }
+            });
+        }
 
         return rootView;
     }

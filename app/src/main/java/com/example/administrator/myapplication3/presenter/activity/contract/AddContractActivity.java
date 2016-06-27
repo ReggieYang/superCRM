@@ -76,8 +76,9 @@ public class AddContractActivity extends AppCompatActivity {
                 ContractService cs = new ContractService(getApplicationContext());
                 setMap();
                 cs.addContract(map);
-                Intent intent = new Intent(AddContractActivity.this, ContractActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(AddContractActivity.this, ContractActivity.class);
+//                startActivity(intent);
+                finish();
             }
         });
         
