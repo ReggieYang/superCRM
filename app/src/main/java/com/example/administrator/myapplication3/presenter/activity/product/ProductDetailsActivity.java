@@ -47,6 +47,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         map.put("introduction", ((TextView) findViewById(R.id.introduction)).getText().toString());
         map.put("productremarks", ((TextView) findViewById(R.id.remark)).getText().toString());
         map.put("productid", ((TextView) findViewById(R.id.id)).getText().toString());
+        map.put("picture", ((TextView) findViewById(R.id.picture)).getText().toString());
     }
 
 
@@ -89,7 +90,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 (((TextView) findViewById(R.id.remark))).setText(data.getProductremarks());
                 (((TextView) findViewById(R.id.introduction))).setText(data.getIntroduction());
                 (((TextView) findViewById(R.id.id))).setText(data.getProductid() + "");
-
+                (((TextView) findViewById(R.id.picture))).setText(data.getPitcure());
 
                 ImageRequest imageRequest = new ImageRequest(
                         data.getPitcure(),
