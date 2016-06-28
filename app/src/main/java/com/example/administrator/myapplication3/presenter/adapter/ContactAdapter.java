@@ -41,7 +41,7 @@ public class ContactAdapter extends ArrayAdapter<Contact> {
         }
 
         holderView.name.setText(contact.getContactsname());
-        holderView.status.setText(contact.getCustomerid()+"");
+        holderView.status.setText(contact.getCustomername());
 
         return view;
     }

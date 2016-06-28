@@ -113,6 +113,7 @@ public class ContactService {
                                 contact.setContactsid(info.getInt("contactsid"));
                                 contact.setContactsname(info.getString("contactsname"));
                                 contact.setCustomerid(info.getInt("customerid"));
+                                contact.setCustomername(info.getString("customername"));
                                 list.add(contact);
                                 listener.success(true, list);
                             }
@@ -155,6 +156,8 @@ public class ContactService {
                                 contact.setContactsid(info.getInt("contactsid"));
                                 contact.setContactsname(info.getString("contactsname"));
                                 contact.setCustomerid(info.getInt("customerid"));
+                                contact.setCustomername(info.getString("customername"));
+                                System.out.println("allcname:" + info.getString("customername"));
                                 list.add(contact);
                                 listener.success(true, list);
                             }
@@ -199,6 +202,8 @@ public class ContactService {
                                 contact.setContactsid(info.getInt("contactsid"));
                                 contact.setContactsname(info.getString("contactsname"));
                                 contact.setCustomerid(info.getInt("customerid"));
+                                contact.setCustomername(info.getString("customername"));
+                                System.out.println("cname:" + info.getString("customername"));
                                 list.add(contact);
                                 listener.success(true, list);
                             }

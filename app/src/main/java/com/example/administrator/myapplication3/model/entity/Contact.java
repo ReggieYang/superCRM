@@ -40,6 +40,16 @@ public class Contact implements ParseJSON{
 
     private String contactsremarks;
 
+    public String getCustomername() {
+        return customername;
+    }
+
+    public void setCustomername(String customername) {
+        this.customername = customername;
+    }
+
+    private String customername;
+
     public int getContactsid() {
         return contactsid;
     }
