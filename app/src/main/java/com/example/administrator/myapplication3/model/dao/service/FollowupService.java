@@ -91,6 +91,8 @@ public class FollowupService {
     public void addFollowup(Map<String, String> map){
 
 
+        map.put("creatorid", "115");
+
         MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/followup_create_json"
                 , map,
                 new Response.Listener<JSONObject>() {

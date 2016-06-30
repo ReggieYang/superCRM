@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="跟进类型"
+            android:text="来源类型"
             android:id="@+id/textView18"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"

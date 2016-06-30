@@ -46,13 +46,14 @@ public class ContactService {
 
 //        Map<String, String> map= new HashMap<String, String>();
 //        map.put("contactsname", name);
-//        map.put("contactid", contactid + "");
+        map.put("staffid", 115 + "");
 
         MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/contact_create_json"
                 , map,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
+                        System.out.println("add:"+jsonObject);
                     }
                 },
                 new Response.ErrorListener() {
@@ -106,7 +107,7 @@ public class ContactService {
                     public void onResponse(JSONObject jsonObject) {
                         try {
                             int count = jsonObject.getInt("recordcount");
-
+                            System.out.println();
                             for(int i = 0;i < count;i++){
                                 Contact contact = new Contact();
                                 JSONObject info = jsonObject.getJSONObject(i+"");
@@ -184,11 +185,11 @@ public class ContactService {
 
     public void getMyContactList(final IUpdateListener<List<Contact>> listener){
         Map<String, String> map= new HashMap<String, String>();
-        map.put("currentpage", "0");
-        map.put("staffid", "155");
+//        map.put("currentpage", "0");
+        map.put("staffid", "115");
         final ArrayList<Contact> list = new ArrayList<Contact>();
 
-        MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/common_contacts_json"
+        MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/query_contacts_by_staffid"
                 , map,
                 new Response.Listener<JSONObject>() {
                     @Override

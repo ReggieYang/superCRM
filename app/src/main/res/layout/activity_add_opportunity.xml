@@ -276,7 +276,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="0dp"
             android:layout_marginLeft="20dp"
-            android:text="155" />
+            android:text="115" />
 
         <TextView
             android:layout_width="wrap_content"

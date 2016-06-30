@@ -120,7 +120,7 @@ public class CustomerService {
     public void getMyCustomerList(final IUpdateListener<List<Customer>> listener){
         Map<String, String> map= new HashMap<String, String>();
         map.put("currentpage", "0");
-        map.put("staffid", "155");
+        map.put("staffid", "115");
         final ArrayList<Customer> list = new ArrayList<Customer>();
 
         MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/common_customer_json"

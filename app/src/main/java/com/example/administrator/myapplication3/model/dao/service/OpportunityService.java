@@ -141,13 +141,16 @@ public class OpportunityService {
         map.put("currentpage", "0");
         final ArrayList<Opportunity> list = new ArrayList<Opportunity>();
 
-        MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/common_opportunity_json"
-                , map,
+//        MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/common_opportunity_json"
+//                , map,
+        MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/opportunity_query_json?opportunityid=-1"
+                , null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
                         try {
                             int count = jsonObject.getInt("recordcount");
+
 
                             for(int i = 0;i < count;i++){
                                 Opportunity opportunity = new Opportunity();
@@ -188,7 +191,7 @@ public class OpportunityService {
     public void getMyOpportunityList(final IUpdateListener<List<Opportunity>> listener){
         Map<String, String> map= new HashMap<String, String>();
         map.put("currentpage", "0");
-        map.put("staffid", "155");
+        map.put("staffid", "115");
         final ArrayList<Opportunity> list = new ArrayList<Opportunity>();
 
         MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/common_opportunity_json"

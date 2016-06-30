@@ -23,6 +23,12 @@ public class AddContactActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_contact);
 
+        System.out.println("cid:"+getIntent().getStringExtra("customerid"));
+
+        if(getIntent().getStringExtra("customerid")!=null){
+            ((TextView)findViewById(R.id.customer)).setText(getIntent().getStringExtra("customerid"));
+        }
+
         Button button = (Button)findViewById(R.id.add);
         button.setOnClickListener(new View.OnClickListener() {
             @Override

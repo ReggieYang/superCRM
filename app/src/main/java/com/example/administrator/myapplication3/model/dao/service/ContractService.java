@@ -179,7 +179,7 @@ public class ContractService {
     public void getMyContractList(final IUpdateListener<List<Contract>> listener){
         Map<String, String> map= new HashMap<String, String>();
         map.put("currentpage", "0");
-        map.put("staffid", "155");
+        map.put("staffid", "115");
         final ArrayList<Contract> list = new ArrayList<Contract>();
 
         MyJsonRequest jsonObjectRequest = new MyJsonRequest("http://nqiwx.mooctest.net:8090/wexin.php/Api/Index/common_contract_json"

@@ -88,8 +88,7 @@ public class ContactListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ContactListActivity.this, AddContactActivity.class);
-                intent.putExtra("sourceid", getIntent().getStringExtra("sourceid"));
-                intent.putExtra("sourcetype", getIntent().getStringExtra("sourcetype"));
+                intent.putExtra("customerid", getIntent().getStringExtra("customerid"));
                 startActivity(intent);
             }
         });
