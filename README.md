@@ -1,4 +1,3 @@
-# superCRM
-supercrm
+# SuperCRM
 
-crm system for android
+CRM system for android based on Wechat application "SuperCRM".
